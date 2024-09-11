@@ -2,7 +2,9 @@
 
 ## notes
 you need neovim 0.10.1 at least
+
 best to compile nvim from source
+
 first uninstall nvim
 ```
 sudo apt remove nvim neovim
