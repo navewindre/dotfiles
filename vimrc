@@ -264,7 +264,7 @@ let g:lightline = {
     \             [ 'readonly', 'filename', 'modified' ] ],
     \   'right': [ [ 'lineinfo' ],
     \              [ 'percent' ],
-    \              [ 'fileformat', 'fileencoding', 'filetype', 'wpm' ] ]
+    \              [ 'fmtcustom', 'enccustom', 'ftcustom', 'wpm' ] ]
     \ },
     \ 'tabline': {
     \   'left': [ ['tabs'] ],
@@ -272,18 +272,44 @@ let g:lightline = {
     \ },
     \ 'component_function': {
     \   'tabline_tabs': 'TablineTabs',
-    \   'wpm': 'WPM'
+    \   'wpm': 'WPM',
+    \   'ftcustom': 'CustomFT',
+    \   'enccustom': 'CustomEncode',
+    \   'fmtcustom': 'CustomFileFormat'
     \ }
 \ }
 
+function CustomFileFormat()
+  if &filetype != 'Avante' && &filetype != 'AvanteInput'
+    return &fileformat
+  endif
+  return ''
+endfunction
+
+function CustomEncode()
+  if &filetype != 'Avante' && &filetype != 'AvanteInput'
+    return &fileencoding
+  endif
+  return ''
+endfunction
+
+function CustomFT()
+  if &filetype != 'Avante' && &filetype != 'AvanteInput'
+    return &filetype
+  endif
+  return ''
+endfunction
+
 function WPM()
-  return (luaeval("require('wpm').historic_graph()") . ' ' . luaeval("require('wpm').wpm()")) . 'wpm'
+  if &filetype != 'Avante' && &filetype != 'AvanteInput'
+    return (luaeval("require('wpm').historic_graph()") . ' ' . luaeval("require('wpm').wpm()")) . 'wpm'
+  endif
+  return ''
 endfunction
 
 function! TablineTabs()
   return lightline#tabline()
 endfunction
-
 
 let g:tabby_keybinding_accept = '<Tab>'
 autocmd Filetype json let g:indentLine_setConceal = 0
@@ -311,7 +337,6 @@ endfunction
 function! GoToTab(tab_number)
   execute 'tabn ' . a:tab_number
 endfunction
-
 
 function! InputTabNumber()
   let l:tab_number = nr2char(getchar())
