@@ -1,5 +1,25 @@
 # dotfiles
 
+## notes
+you need neovim 0.10.1 at least
+best to compile nvim from source
+first uninstall nvim
+```
+sudo apt uninstall nvim neovim
+```
+then make sure nvim isnt installed somewhere else
+```
+where nvim
+```
+if it is, delete it
+then, build and install neovim from source:
+```
+git clone https://github.com/neovim/neovim.git
+cd neovim
+sudo make release
+sudo make install
+```
+
 ## install
 
 1. install zsh (sudo apt install zsh)
