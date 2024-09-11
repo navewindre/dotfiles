@@ -5,7 +5,7 @@ you need neovim 0.10.1 at least
 best to compile nvim from source
 first uninstall nvim
 ```
-sudo apt uninstall nvim neovim
+sudo apt remove nvim neovim
 ```
 then make sure nvim isnt installed somewhere else
 ```
