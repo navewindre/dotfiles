@@ -7,7 +7,7 @@
 ```
 sh -c $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)
 ```
-3. put config in ~/.config/dotfiles
+3. put config in ~/.config/
 4. put vimrc in ~/.vimrc
 5. run:
 ```
