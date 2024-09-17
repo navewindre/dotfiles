@@ -9,6 +9,8 @@ set showtabline=2
 set nocompatible
 filetype plugin on
 
+let g:mapleader = '\'
+
 lua <<EOF
   local Plug = vim.fn['plug#'];
   vim.call('plug#begin');
@@ -21,6 +23,7 @@ lua <<EOF
   Plug('hrsh7th/cmp-cmdline')
   Plug('hrsh7th/nvim-cmp')
   Plug('itchyny/lightline.vim')
+  Plug('mengelbrecht/lightline-bufferline')
   Plug('shawnohare/hadalized.nvim')
   Plug('preservim/nerdtree')
   Plug('bignimbus/pop-punk.vim')
@@ -41,12 +44,13 @@ lua <<EOF
   Plug('nvim-tree/nvim-web-devicons')
   Plug('HakonHarnes/img-clip.nvim')
   Plug('jcdickinson/wpm.nvim')
+  Plug('puremourning/vimspector')
 
   Plug('yetone/avante.nvim', { ['branch'] = 'main', ['do'] = function() require('avante.api').build() end } )
   vim.call('plug#end');
 
   -- Set up nvim-cmp.
-  local cmp = require'cmp'
+  local cmp = require('cmp');
 
   vim.opt.updatetime = 500
   local diagnostics_enabled = true
@@ -63,18 +67,11 @@ lua <<EOF
 
   cmp.setup({
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-    },
+    window = {},
     mapping = cmp.mapping.preset.insert({
       -- ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       -- ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -82,17 +79,15 @@ lua <<EOF
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' },
+        -- { name = 'man' }
+      }, {
+        { name = 'buffer' }
     })
   })
 
-  -- Set configuration for specific filetype.
+
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
       { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
@@ -110,14 +105,36 @@ lua <<EOF
   })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-   cmp.setup.cmdline(':', {
+  cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-   })
+      { name = 'path' },
+      { name = 'man' },
+    }, { { name = 'cmdline' } } )
+  })
+
+  cmp.register_source('man', {
+    complete = function(self, request, callback)
+      local input = string.match(request.context.cursor_before_line, "Man%s+(.*)$")
+      if not input then
+        return
+      end
+      local result = {}
+      local handle = io.popen("man -k . | cut -d ' ' -f 1,2 | sed 's/ (/(/'")
+      if handle then
+        for line in handle:lines() do
+          if vim.startswith(line:lower(), input:lower()) then
+            table.insert(result, {
+              label = line,
+              kind = cmp.lsp.CompletionItemKind.File,
+            })
+          end
+        end
+        handle:close()
+      end
+      callback({ items = result, isIncomplete = false })
+    end
+  })
 
   require("wpm").setup({
     sample_count = 8,
@@ -230,8 +247,16 @@ lua <<EOF
      ---@type AvanteProvider
       ollama = {
         ["local"] = true,
-        endpoint = "127.0.0.1:11434/v1",
-        model = "llama3.1:8b-instruct-q5_K_M",
+        endpoint = "127.0.0.1:11432/v1",
+        -- model = "codestral",
+        model = "codestral:22b-v0.1-q6_K",
+        -- model = "mistral-nemo:12b-instruct-2407-q8_0",
+        -- model = "mistral-nemo:12b-instruct-2407-q4_K_S",
+        -- model = "deepseek-coder-v2:16b-lite-instruct-q5_K_M",
+        -- model = "llama3.1:8b-instruct-q5_K_M",
+        -- model = "starcoder2:15b-instruct-v0.1-q3_K_S",
+        -- model = "gemma2:27b-instruct-q5_K_M",
+        -- model = "mixtral:8x7b-instruct-v0.1-q3_K_L",
         parse_curl_args = function(opts, code_opts)
          return {
            url = opts.endpoint .. "/chat/completions",
@@ -242,7 +267,7 @@ lua <<EOF
            body = {
              model = opts.model,
              messages = require("avante.providers").copilot.parse_message(code_opts), -- you can make your own message, but this is very advanced
-             max_tokens = 8192,
+             max_tokens = 20000,
              stream = true,
            },
          }
@@ -254,9 +279,9 @@ lua <<EOF
     },
 
   })
-
 EOF
-
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_enable_debug_logging = 0
 let g:lightline = {
     \ 'colorscheme': 'landscape',
     \ 'active': {
@@ -267,17 +292,47 @@ let g:lightline = {
     \              [ 'fmtcustom', 'enccustom', 'ftcustom', 'wpm' ] ]
     \ },
     \ 'tabline': {
-    \   'left': [ ['tabs'] ],
-    \   'right': [ ['buffers'] ]
+    \   'left': [ ['buffers'] ],
+    \   'right': [ ['close'], ['tabscustom'] ]
+    \ },
+    \ 'component_expand': {
+    \   'buffers': 'lightline#bufferline#buffers'
+    \ },
+    \ 'component_type': {
+    \   'buffers': 'tabsel'
     \ },
     \ 'component_function': {
     \   'tabline_tabs': 'TablineTabs',
     \   'wpm': 'WPM',
     \   'ftcustom': 'CustomFT',
     \   'enccustom': 'CustomEncode',
-    \   'fmtcustom': 'CustomFileFormat'
+    \   'fmtcustom': 'CustomFileFormat',
+    \   'tabscustom': 'CustomTabs'
     \ }
 \ }
+
+let g:lightline.component_raw = {'buffers': 1}
+let g:lightline#bufferline#clickable = 1
+let g:lightline#bufferline#show_number = 2
+
+function! CustomTabs()
+  if tabpagenr('$') == 1
+    return ''
+  endif
+
+  let current_tab = tabpagenr()
+  let tab_list = []
+
+  for i in range(1, tabpagenr('$'))
+    if i == current_tab
+      call add(tab_list, '[' . i . ']')
+    else
+      call add(tab_list, i)
+    endif
+  endfor
+
+  return join(tab_list, ' | ')
+endfunction
 
 function CustomFileFormat()
   if &filetype != 'Avante' && &filetype != 'AvanteInput'
@@ -313,12 +368,21 @@ endfunction
 
 let g:tabby_keybinding_accept = '<Tab>'
 autocmd Filetype json let g:indentLine_setConceal = 0
+autocmd Filetype javascriptreact,typescriptreact TSEnable indent
+
+function! SWB()
+  if winnr('$') > 1
+    wincmd w
+  else
+    execute('call lightline#bufferline#go_previous()')
+  endif
+endfunction
 
 function! SW()
   if winnr('$') > 1
     wincmd w
   else
-    tabnext
+    execute('call lightline#bufferline#go_next()')
   endif
 endfunction
 
@@ -326,8 +390,11 @@ function! Q()
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
     NERDTreeClose
   else
-    if winnr('$') > 1 
-      q
+    nohlsearch
+    if winnr('$') > 1
+      close
+    elseif len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
+      call feedkeys(':bd')
     else
       call feedkeys(':q')
     endif
@@ -335,7 +402,7 @@ function! Q()
 endfunction
 
 function! GoToTab(tab_number)
-  execute 'tabn ' . a:tab_number
+  execute 'call lightline#bufferline#go(' . a:tab_number . ')'
 endfunction
 
 function! InputTabNumber()
@@ -345,12 +412,24 @@ function! InputTabNumber()
   endif
 endfunction
 
+function! TurnOffCDiag()
+  if &filetype == 'c' || &filetype == 'cpp'
+    ALEDisable
+  endif
+endfunction
+
+autocmd BufReadPost * call TurnOffCDiag()
+
 nnoremap <C-e> :NERDTree<CR>
 inoremap <C-e> <Esc>:NERDTree<CR>
 vnoremap <C-e> <Esc>:NERDTree<CR>
 
 nnoremap <Esc> :call Q()<CR>
+nnoremap <S-Tab> :call SWB()<CR>
 nnoremap <Tab> :call SW()<CR>
+
+noremap <leader><Tab> :tabn<CR>
+noremap <leader><S-Tab> :tabp<CR>
 
 nnoremap <F1> :call InputTabNumber()<CR>
 inoremap <F1> <ESC>:call InputTabNumber()<CR>
@@ -361,15 +440,21 @@ nnoremap <C-f> :Telescope current_buffer_fuzzy_find<CR>
 
 nnoremap <F4> :lua ToggleDiagnostics()<CR>
 
-vnoremap <Tab> >gv
-nnoremap <S-Tab> <gv
+nnoremap <F7> :VimspectorRestart<CR>
+nnoremap <leader>b :VimspectorBreakpoints<CR>
+nnoremap <leader>d :VimspectorDisassemble<CR>
+nnoremap <leader>[ <Plug>VimspectorUpFrame
+nnoremap <leader>] <Plug>VimspectorDownFrame
+nnoremap <silent> <C-Space> <Plug>VimspectorBalloonEval
+
 inoremap <S-Tab> <C-d>
+vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
-let g:NERDTreeCustomOpenArgs = {
-    \ 'file': {'where': 't', 'reuse': 'all'},
-    \ 'dir': {}
-\ }
+" let g:NERDTreeCustomOpenArgs = {
+"    \ 'file': {'where': 't', 'reuse': 'all'},
+"    \ 'dir': {}
+"\ }
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
@@ -386,6 +471,7 @@ hi @variable guifg=#40FF40 ctermfg=Green
 hi Identifier guifg=#27ea91
 hi def link @lsp.typemod.variable.defaultLibrary.javascript Special
 hi def link @punctuation.special.javascript Delimiter
+hi @type.builtin.cpp guifg=#ea5ce2
 hi SpecialChar ctermfg=9 guifg=#e4600e
 
 let g:vim_json_conceal=0
