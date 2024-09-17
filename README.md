@@ -5,16 +5,19 @@ you need neovim 0.10.1 at least
 
 best to compile nvim from source
 
-first uninstall nvim
+1. uninstall nvim
 ```
 sudo apt remove nvim neovim
 ```
-then make sure nvim isnt installed somewhere else
+2. make sure nvim isnt installed somewhere else
 ```
 where nvim
 ```
-if it is, delete it
-then, build and install neovim from source:
+3. if it is, delete it
+```
+sudo rm {vim location here}
+```
+4. build and install neovim from source:
 ```
 git clone https://github.com/neovim/neovim.git
 cd neovim
@@ -37,7 +40,11 @@ ln -s ~/.config/nvim/init.vim ~/.vimrc
 ```
 6. open vim
 7. run :PlugInstall
-8. enjoy
+8. install dependencies
+```
+sudo apt install fd-find rigrep
+```
+9. enjoy
 
 ## for completions
 
