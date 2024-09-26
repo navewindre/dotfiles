@@ -7,6 +7,7 @@ set title
 set smartcase
 set showtabline=2
 set nocompatible
+set signcolumn=no
 filetype plugin on
 
 let g:mapleader = '\'
@@ -150,7 +151,14 @@ lua <<EOF
   }
 
   require('lspconfig')['ts_ls'].setup {
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = {
+      eslint = {
+        rules = {
+          eqeqeq = "off"
+        }
+      }
+    }
   }
 
   require('lspconfig')['intelephense'].setup {
@@ -247,9 +255,9 @@ lua <<EOF
      ---@type AvanteProvider
       ollama = {
         ["local"] = true,
-        endpoint = "127.0.0.1:11432/v1",
-        -- model = "codestral",
-        model = "codestral:22b-v0.1-q6_K",
+        endpoint = "127.0.0.1:11434/v1",
+        model = "codestral",
+        -- model = "codestral:22b-v0.1-q6_K",
         -- model = "mistral-nemo:12b-instruct-2407-q8_0",
         -- model = "mistral-nemo:12b-instruct-2407-q4_K_S",
         -- model = "deepseek-coder-v2:16b-lite-instruct-q5_K_M",
@@ -314,6 +322,8 @@ let g:lightline = {
 let g:lightline.component_raw = {'buffers': 1}
 let g:lightline#bufferline#clickable = 1
 let g:lightline#bufferline#show_number = 2
+
+let g:ale_javascript_eslint_options = '--config /home/aurelia/.eslintrc.json'
 
 function! CustomTabs()
   if tabpagenr('$') == 1
@@ -428,6 +438,10 @@ nnoremap <Esc> :call Q()<CR>
 nnoremap <S-Tab> :call SWB()<CR>
 nnoremap <Tab> :call SW()<CR>
 
+nnoremap w <S-e>
+nnoremap <S-w> <S-b>
+nnoremap <S-e> b
+
 noremap <leader><Tab> :tabn<CR>
 noremap <leader><S-Tab> :tabp<CR>
 
@@ -450,6 +464,9 @@ nnoremap <silent> <C-Space> <Plug>VimspectorBalloonEval
 inoremap <S-Tab> <C-d>
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+
+nnoremap <leader><left> <Plug>lightline#bufferline#move_previous()
+nnoremap <leader><right> <Plug>lightline#bufferline#move_next()
 
 " let g:NERDTreeCustomOpenArgs = {
 "    \ 'file': {'where': 't', 'reuse': 'all'},

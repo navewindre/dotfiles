@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/home/aurelia/.cargo/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/home/$USER/.cargo/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -89,9 +89,6 @@ alias mpa="mpv --no-video"
 
 alias l='ls'
 alias lg='lazygit'
-alias gpt='node "/media/aurelia/sda0 [dev]/gpt.js"'
-
-export ANDROID_HOME=/media/aurelia/data/android-projects
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -117,15 +114,5 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-OLLAMA_HOME="/media/aurelia/dev/ollama"
-OLLAMA_MODELS="/media/aurelia/dev/ollama/models"
-export OLLAMA_HOME
-export OLLAMA_MODELS
-
-EMSDK_QUIET=1 source /home/aurelia/code/emsdk/emsdk_env.sh
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/aurelia/google-cloud-sdk/path.zsh.inc' ]; then . '/home/aurelia/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/aurelia/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/aurelia/google-cloud-sdk/completion.zsh.inc'; fi
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
