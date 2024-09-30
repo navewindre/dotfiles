@@ -21,7 +21,6 @@ sudo rm {vim location here}
 ```
 git clone https://github.com/neovim/neovim.git
 cd neovim
-sudo make release
 sudo make install
 ```
 
@@ -36,13 +35,13 @@ sh -c $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tool
 4. put vimrc in ~/.vimrc
 5. run:
 ```
-ln -s ~/.config/nvim/init.vim ~/.vimrc
+ln -s ~/.vimrc ~/.config/nvim/init.vim
 ```
 6. open vim
 7. run :PlugInstall
 8. install dependencies
 ```
-sudo apt install fd-find rigrep
+sudo apt install fd-find ripgrep
 ```
 9. enjoy
 
