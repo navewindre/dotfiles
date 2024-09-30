@@ -256,6 +256,7 @@ lua <<EOF
       ollama = {
         ["local"] = true,
         endpoint = "127.0.0.1:11434/v1",
+        -- model = 'yi-coder:9b-chat-q4_0',
         model = "codestral",
         -- model = "codestral:22b-v0.1-q6_K",
         -- model = "mistral-nemo:12b-instruct-2407-q8_0",
@@ -381,11 +382,7 @@ autocmd Filetype json let g:indentLine_setConceal = 0
 autocmd Filetype javascriptreact,typescriptreact TSEnable indent
 
 function! SWB()
-  if winnr('$') > 1
-    wincmd w
-  else
-    execute('call lightline#bufferline#go_previous()')
-  endif
+  execute('call lightline#bufferline#go_previous()')
 endfunction
 
 function! SW()
@@ -400,7 +397,7 @@ function! Q()
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
     NERDTreeClose
   else
-    nohlsearch
+    call feedkeys(":nohlsearch\<CR>")
     if winnr('$') > 1
       close
     elseif len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
@@ -435,12 +432,17 @@ inoremap <C-e> <Esc>:NERDTree<CR>
 vnoremap <C-e> <Esc>:NERDTree<CR>
 
 nnoremap <Esc> :call Q()<CR>
+tnoremap <Esc> <C-\><C-n>
 nnoremap <S-Tab> :call SWB()<CR>
 nnoremap <Tab> :call SW()<CR>
 
 nnoremap w <S-e>
 nnoremap <S-w> <S-b>
 nnoremap <S-e> b
+
+vnoremap w <S-e>
+vnoremap <S-w> <S-b>
+vnoremap <S-e> b
 
 noremap <leader><Tab> :tabn<CR>
 noremap <leader><S-Tab> :tabp<CR>
@@ -496,6 +498,8 @@ let g:markdown_syntax_conceal=0
 let g:indentLine_color_term=239
 let g:indentLine_color_gui='#141414'
 let NERDTreeQuitOnOpen=1
+
+autocmd BufNewFile,BufRead *.modelfile set ft=gotmpl
 
 aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.Inspect
