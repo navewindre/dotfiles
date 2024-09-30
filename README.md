@@ -54,6 +54,13 @@ https://tabby.tabbyml.com/docs/quick-start/register-account/
 3. copy your api key into ~/.tabby_client/agent/config.toml
 4. enjoy
 
+## for tabby autorunner
+
+1. put contents of tabby-runner/ into the same folder as tabby
+2. edit run-client.sh to use models of your liking. consult https://tabby.tabbyml.com/docs/models
+3. install node modules
+4. run the script with ./run.sh. it will open tabby automatically when vim is opened.
+
 ## for local llm (avante)
 
 1. install ollama
