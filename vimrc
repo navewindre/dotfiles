@@ -162,6 +162,10 @@ lua <<EOF
     }
   }
 
+  require('lspconfig')['zls'].setup {
+    capabilities = capabilities
+  }
+
   require('lspconfig')['intelephense'].setup {
     capabilities = capabilities
   }
@@ -457,6 +461,7 @@ vnoremap <F1> <ESC>:call InputTabNumber()<CR>
 
 nnoremap <F2> :Telescope live_grep<CR>
 nnoremap <C-f> :Telescope current_buffer_fuzzy_find<CR>
+nnoremap <C-x> :Telescope marks<CR>
 
 nnoremap <F4> :lua ToggleDiagnostics()<CR>
 
@@ -474,10 +479,7 @@ vnoremap <S-Tab> <gv
 nnoremap <leader><left> <Plug>lightline#bufferline#move_previous()
 nnoremap <leader><right> <Plug>lightline#bufferline#move_next()
 
-" let g:NERDTreeCustomOpenArgs = {
-"    \ 'file': {'where': 't', 'reuse': 'all'},
-"    \ 'dir': {}
-"\ }
+nnoremap f <cmd>lua vim.diagnostic.open_float()<CR>
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
