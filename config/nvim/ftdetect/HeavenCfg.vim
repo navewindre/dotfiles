@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.hmap,*.hcfg set filetype=HeavenCfg
+au BufRead,BufNewFile *.hmap,*.hcfg,*.hmf,*.hres set filetype=HeavenCfg
