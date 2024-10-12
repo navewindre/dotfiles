@@ -11,6 +11,7 @@ set signcolumn=no
 filetype plugin on
 
 let g:mapleader = '\'
+let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 
 lua <<EOF
   local Plug = vim.fn['plug#'];
@@ -255,9 +256,12 @@ lua <<EOF
      ---@type AvanteProvider
       ollama = {
         ["local"] = true,
-        endpoint = "127.0.0.1:11434/v1",
+        endpoint = "127.0.0.1:11432/v1",
+        use_xml_format = false,
+        -- model = 'qwen2.5:7b-instruct-q4_K_M',
+        model = 'qwen2.5-coder:7b-instruct-q5_K_M',
         -- model = 'yi-coder:9b-chat-q4_0',
-        model = "codestral",
+        -- model = "codestral",
         -- model = "codestral:22b-v0.1-q6_K",
         -- model = "mistral-nemo:12b-instruct-2407-q8_0",
         -- model = "mistral-nemo:12b-instruct-2407-q4_K_S",
@@ -456,7 +460,7 @@ nnoremap <C-f> :Telescope current_buffer_fuzzy_find<CR>
 
 nnoremap <F4> :lua ToggleDiagnostics()<CR>
 
-nnoremap <F7> :VimspectorRestart<CR>
+nnoremap <F7> :VimspectorReset<CR>
 nnoremap <leader>b :VimspectorBreakpoints<CR>
 nnoremap <leader>d :VimspectorDisassemble<CR>
 nnoremap <leader>[ <Plug>VimspectorUpFrame

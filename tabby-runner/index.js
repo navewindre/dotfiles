@@ -5,7 +5,6 @@ let child;
 let killTabby = () => {
   exec( "ps aux | grep -E 'tabby'", ( error, stdout, stderr ) => {
     if( stdout ) {
-      console.log( stdout );
       let lines = stdout.split( '\n' );
       for( let line of lines ) {
         let parts = line.split( /\s+/ );
@@ -35,7 +34,9 @@ let loop = () => {
       }
       if( vimOpen ) {
         if( child ) return setTimeout( loop, 120000 );
-        child = cp.exec( `./run-client.sh` );
+        child = cp.exec( `./run-client.sh`, ( error, stdout, stderr ) => {
+          console.log( stdout );
+        } );
         return setTimeout( loop, 5000 );
       }
 

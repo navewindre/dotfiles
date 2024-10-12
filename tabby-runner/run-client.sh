@@ -1,1 +1,1 @@
-TABBY_ROOT='/media/aurelia/dev/tabby/' ./tabby serve --model /media/aurelia/dev/tabby/models/deepseek-quant --chat-model /media/aurelia/dev/tabby/models/llama3.2-1b --device cuda
+TABBY_ROOT='/media/aurelia/dev/tabby/' ./tabby serve --model /media/aurelia/dev/tabby/models/codeqwen2.5-1.5b --device cuda --port 8082
