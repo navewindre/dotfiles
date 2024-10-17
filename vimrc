@@ -1,15 +1,3 @@
-set autoindent expandtab tabstop=2 shiftwidth=2 number
-set mouse=a
-set mousemodel=popup
-set noshowmode
-set termguicolors
-set title
-set smartcase
-set showtabline=2
-set nocompatible
-set signcolumn=no
-filetype plugin on
-
 let g:mapleader = '\'
 let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 
@@ -26,9 +14,7 @@ lua <<EOF
   Plug('hrsh7th/nvim-cmp')
   Plug('itchyny/lightline.vim')
   Plug('mengelbrecht/lightline-bufferline')
-  Plug('shawnohare/hadalized.nvim')
   Plug('preservim/nerdtree')
-  Plug('bignimbus/pop-punk.vim')
   Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
   Plug('nvim-lua/plenary.nvim')
   Plug('nvim-telescope/telescope.nvim', { tag = '0.1.8' })
@@ -297,6 +283,18 @@ lua <<EOF
 
   })
 EOF
+
+set autoindent expandtab tabstop=2 shiftwidth=2 number
+set mouse=a
+set mousemodel=popup
+set noshowmode
+set termguicolors
+set title
+set smartcase
+set showtabline=2
+set nocompatible
+set signcolumn=no
+filetype plugin on
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_enable_debug_logging = 0
 let g:lightline = {
@@ -332,6 +330,7 @@ let g:lightline.component_raw = {'buffers': 1}
 let g:lightline#bufferline#clickable = 1
 let g:lightline#bufferline#show_number = 2
 
+let g:zig_fmt_autosave=0
 let g:ale_javascript_eslint_options = '--config /home/aurelia/.eslintrc.json'
 
 function! CustomTabs()
@@ -394,11 +393,7 @@ function! SWB()
 endfunction
 
 function! SW()
-  if winnr('$') > 1
-    wincmd w
-  else
-    execute('call lightline#bufferline#go_next()')
-  endif
+  execute('call lightline#bufferline#go_next()')
 endfunction
 
 function! Q()
@@ -406,9 +401,7 @@ function! Q()
     NERDTreeClose
   else
     call feedkeys(":nohlsearch\<CR>")
-    if winnr('$') > 1
-      close
-    elseif len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
+    if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
       call feedkeys(':bd')
     else
       call feedkeys(':q')
@@ -432,6 +425,60 @@ function! TurnOffCDiag()
     ALEDisable
   endif
 endfunction
+
+function! AddSpacesToParentheses() range
+    let saved_search = @/
+    let pattern = '\v(\w+\()(\S.{-})(\))'
+    execute a:firstline . ',' . a:lastline . 's/' . pattern . '/\1 \2 \3/ge'
+    execute a:firstline . ',' . a:lastline . 's/( )/( )/ge'
+    execute a:firstline . ',' . a:lastline . 's/(\s\+/( /ge'
+    execute a:firstline . ',' . a:lastline . 's/\s\+)/ )/ge'
+    let @/ = saved_search
+endfunction
+
+function! OpenLsp()
+  let float_visible = 0
+  for win in range(1, winnr('$'))
+    let config = nvim_win_get_config(win_getid(win))
+    if has_key(config, 'relative') && config.relative != ''
+      let float_visible = 1
+      break
+    endif
+  endfor
+
+  if !float_visible
+    lua vim.lsp.buf.hover()
+  endif
+endfunction
+
+function! OpenFloat()
+  let float_visible = 0
+  for win in range(1, winnr('$'))
+    let config = nvim_win_get_config(win_getid(win))
+    if has_key(config, 'relative') && config.relative != ''
+      let float_visible = 1
+      break
+    endif
+  endfor
+
+  if !float_visible
+    lua vim.diagnostic.open_float(nil, {focus=false})
+  endif
+
+  for win in range(1, winnr('$'))
+    let config = nvim_win_get_config(win_getid(win))
+    if has_key(config, 'relative') && config.relative != ''
+      let float_visible = 1
+      break
+    endif
+  endfor
+
+  if !float_visible
+    lua vim.lsp.buf.hover()
+  endif
+endfunction
+
+vnoremap <leader>ap :call AddSpacesToParentheses()<CR>
 
 autocmd BufReadPost * call TurnOffCDiag()
 
@@ -479,14 +526,15 @@ vnoremap <S-Tab> <gv
 nnoremap <leader><left> <Plug>lightline#bufferline#move_previous()
 nnoremap <leader><right> <Plug>lightline#bufferline#move_next()
 
-nnoremap f <cmd>lua vim.diagnostic.open_float()<CR>
+nnoremap f :call OpenFloat()<CR>
+nnoremap <leader>f :call OpenLsp()<CR>
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
 hi String ctermfg=1 guifg=#ea5971
 hi Character ctermfg=1 guifg=#dddddd
 hi CmpItemKindDefault guifg=#7cede9 guibg=#101010
-hi javaScriptIdentifier guifg=#ff40ff ctermfg=Blue
+hi javaScriptIdentifier guifg=#ff40ff ctermfg=Magenta
 hi Delimiter ctermfg=14 guifg=#cccccc
 hi AvanteConflictCurrent guibg=#101010
 hi AvanteConflictIncoming guibg=#102010
@@ -496,6 +544,7 @@ hi @variable guifg=#40FF40 ctermfg=Green
 hi Identifier guifg=#27ea91
 hi def link @lsp.typemod.variable.defaultLibrary.javascript Special
 hi def link @punctuation.special.javascript Delimiter
+hi def link @lsp.type.keywordLiteral.zig Special
 hi @type.builtin.cpp guifg=#ea5ce2
 hi SpecialChar ctermfg=9 guifg=#e4600e
 
@@ -505,6 +554,7 @@ let g:indentLine_color_term=239
 let g:indentLine_color_gui='#141414'
 let NERDTreeQuitOnOpen=1
 
+autocmd BufNewFile,BufRead *.zig set shiftwidth=2
 autocmd BufNewFile,BufRead *.modelfile set ft=gotmpl
 
 aunmenu PopUp.How-to\ disable\ mouse
