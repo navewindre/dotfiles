@@ -420,8 +420,9 @@ function! InputTabNumber()
   endif
 endfunction
 
-function! TurnOffCDiag()
-  if &filetype == 'c' || &filetype == 'cpp'
+function! TurnOffDiag()
+  let disallowed_langs = ['c', 'cpp', 'javascript', 'typescript', 'typescriptreact', 'javascriptreact']
+  if index(disallowed_langs, &filetype) >= 0
     ALEDisable
   endif
 endfunction
@@ -480,7 +481,7 @@ endfunction
 
 vnoremap <leader>ap :call AddSpacesToParentheses()<CR>
 
-autocmd BufReadPost * call TurnOffCDiag()
+autocmd BufReadPost * call TurnOffDiag()
 
 nnoremap <C-e> :NERDTree<CR>
 inoremap <C-e> <Esc>:NERDTree<CR>
@@ -527,7 +528,7 @@ nnoremap <leader><left> <Plug>lightline#bufferline#move_previous()
 nnoremap <leader><right> <Plug>lightline#bufferline#move_next()
 
 nnoremap f :call OpenFloat()<CR>
-nnoremap <leader>f :call OpenLsp()<CR>
+nnoremap F :call OpenLsp()<CR>
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
@@ -543,6 +544,7 @@ hi Variable guifg=#40FF40 ctermfg=Green
 hi @variable guifg=#40FF40 ctermfg=Green
 hi Identifier guifg=#27ea91
 hi def link @lsp.typemod.variable.defaultLibrary.javascript Special
+hi def link @lsp.typemod.variable.defaultLibrary.typescript Special
 hi def link @punctuation.special.javascript Delimiter
 hi def link @lsp.type.keywordLiteral.zig Special
 hi @type.builtin.cpp guifg=#ea5ce2
