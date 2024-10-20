@@ -246,8 +246,7 @@ lua <<EOF
      ---@type AvanteProvider
       ollama = {
         ["local"] = true,
-        endpoint = "127.0.0.1:11432/v1",
-        use_xml_format = false,
+        endpoint = "127.0.0.1:11434/v1",
         -- model = 'qwen2.5:7b-instruct-q4_K_M',
         model = 'qwen2.5-coder:7b-instruct-q5_K_M',
         -- model = 'yi-coder:9b-chat-q4_0',
@@ -385,7 +384,7 @@ function! TablineTabs()
 endfunction
 
 let g:tabby_keybinding_accept = '<Tab>'
-autocmd Filetype json let g:indentLine_setConceal = 0
+autocmd Filetype json,jsonc let g:indentLine_setConceal = 0
 autocmd Filetype javascriptreact,typescriptreact TSEnable indent
 
 function! SWB()
@@ -527,8 +526,20 @@ vnoremap <S-Tab> <gv
 nnoremap <leader><left> <Plug>lightline#bufferline#move_previous()
 nnoremap <leader><right> <Plug>lightline#bufferline#move_next()
 
-nnoremap f :call OpenFloat()<CR>
-nnoremap F :call OpenLsp()<CR>
+nnoremap t :call OpenFloat()<CR>
+nnoremap T :call OpenLsp()<CR>
+
+nnoremap gd <C-]>
+
+nnoremap [[ ?{<CR>:nohl<CR>
+nnoremap ]] /}<CR>:nohl<CR>
+nnoremap ][ /{<CR>:nohl<CR>
+nnoremap [] ?}<CR>:nohl<CR>
+
+vnoremap [[ ?{<CR>:<C-u>nohl<CR>gv
+vnoremap ]] /}<CR>:<C-u>nohl<CR>gv
+vnoremap ][ /{<CR>:<C-u>nohl<CR>gv
+vnoremap [] ?}<CR>:<C-u>nohl<CR>gv
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
