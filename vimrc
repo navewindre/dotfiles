@@ -75,7 +75,6 @@ lua <<EOF
     })
   })
 
-
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
       { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
@@ -130,9 +129,7 @@ lua <<EOF
     percentile = 1
   })
 
-  -- Set up lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   require('lspconfig')['clangd'].setup {
     capabilities = capabilities
   }
@@ -386,6 +383,7 @@ endfunction
 let g:tabby_keybinding_accept = '<Tab>'
 autocmd Filetype json,jsonc let g:indentLine_setConceal = 0
 autocmd Filetype javascriptreact,typescriptreact TSEnable indent
+autocmd Filetype * call tabby#inline_completion#keybindings#Setup()
 
 function! SWB()
   execute('call lightline#bufferline#go_previous()')
@@ -558,6 +556,7 @@ hi def link @lsp.typemod.variable.defaultLibrary.javascript Special
 hi def link @lsp.typemod.variable.defaultLibrary.typescript Special
 hi def link @punctuation.special.javascript Delimiter
 hi def link @lsp.type.keywordLiteral.zig Special
+hi def link @lsp.type.string.zig NONE
 hi @type.builtin.cpp guifg=#ea5ce2
 hi SpecialChar ctermfg=9 guifg=#e4600e
 
