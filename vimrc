@@ -394,6 +394,22 @@ function! SW()
 endfunction
 
 function! Q()
+  let float_visible = 0
+  let winid = 0
+  for win in range(1, winnr('$'))
+    let config = nvim_win_get_config(win_getid(win))
+    if has_key(config, 'relative') && config.relative != ''
+      let float_visible = 1
+      let winid = win_getid(win)
+      break
+    endif
+  endfor
+  if float_visible
+    call nvim_win_close(winid, v:true)
+    return
+  endif
+
+
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
     NERDTreeClose
   else
@@ -444,41 +460,53 @@ function! OpenLsp()
     endif
   endfor
 
-  if !float_visible
-    lua vim.lsp.buf.hover()
+  if float_visible
+    call Q()
   endif
+
+  call feedkeys('K')
 endfunction
 
 function! OpenFloat()
   let float_visible = 0
+  let g:float_winid = 0
   for win in range(1, winnr('$'))
     let config = nvim_win_get_config(win_getid(win))
     if has_key(config, 'relative') && config.relative != ''
       let float_visible = 1
+      let g:float_winid = win_getid(win)
       break
     endif
   endfor
 
-  if !float_visible
-    lua vim.diagnostic.open_float(nil, {focus=false})
-  endif
 
-  for win in range(1, winnr('$'))
-    let config = nvim_win_get_config(win_getid(win))
-    if has_key(config, 'relative') && config.relative != ''
-      let float_visible = 1
-      break
-    endif
-  endfor
+lua <<EOF
+local win = vim.diagnostic.open_float(nil, {focus=false})
+if win == nil then
+  vim.fn.feedkeys('K')
+end
+EOF
 
-  if !float_visible
-    lua vim.lsp.buf.hover()
+endfunction
+
+function! GFLine()
+  let file_line = expand('<cfile>')
+  let parts = split(file_line, '#L')
+  if len(parts) > 1
+      execute 'e +' . parts[1] . ' ' . parts[0] | sleep 200m
+      execute('call lightline#bufferline#go_next()')
+      set number
+  else
+      normal! gf
   endif
 endfunction
 
+nnoremap gf :call GFLine()<CR>
 vnoremap <leader>ap :call AddSpacesToParentheses()<CR>
 
 autocmd BufReadPost * call TurnOffDiag()
+
+nnoremap <CR> :noh<CR><CR>
 
 nnoremap <C-e> :NERDTree<CR>
 inoremap <C-e> <Esc>:NERDTree<CR>
@@ -528,6 +556,9 @@ nnoremap t :call OpenFloat()<CR>
 nnoremap T :call OpenLsp()<CR>
 
 nnoremap gd <C-]>
+nnoremap <leader>gd :Telescope diagnostics<CR>
+
+nnoremap <leader>gr :Telescope lsp_references<CR>
 
 nnoremap [[ ?{<CR>:nohl<CR>
 nnoremap ]] /}<CR>:nohl<CR>
