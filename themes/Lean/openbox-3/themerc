@@ -1,5 +1,5 @@
 #NB #383838
-#AB #8fa876
+#AB #9999ff
 #NF #dadada
 #AF #ffffff
 border.width: 1
@@ -15,32 +15,32 @@ window.*.title.bg: flat solid
 window.*.label.bg: parentrelative
 window.*.button.*.bg: parentrelative
 window.*.handle.bg: flat solid
-window.*.text.justify: center
-window.active.title.bg.color: #8fa876
+window.*.text.justify: left
+window.active.title.bg.color: #9999ff
 window.active.label.text.color: #ffffff
 window.active.button.*.unpressed.image.color: #ffffff
-window.active.button.*.disabled.image.color: #b4c5a3
-window.active.button.*.hover.image.color: #c7d3ba
-window.active.button.*.pressed.image.color: #47543b
-window.active.handle.bg.color: #8fa876
-window.inactive.title.bg.color: #383838
-window.inactive.label.text.color: #898989
+window.active.button.*.disabled.image.color: #ccccff
+window.active.button.*.hover.image.color: #e6e6ff
+window.active.button.*.pressed.image.color: #6666ff
+window.active.handle.bg.color: #9999ff
+window.inactive.title.bg.color: #cccccc
+window.inactive.label.text.color: #808080
 window.inactive.button.*.unpressed.image.color: #898989
 window.inactive.button.*.disabled.image.color: #6e6e6e
 window.inactive.button.*.hover.image.color: #dadada
 window.inactive.button.*.pressed.image.color: #1c1c1c
 window.inactive.handle.bg.color: #383838
 menu.title.bg: flat solid
-menu.title.bg.color: #8fa876
-menu.title.text.color: #ffffff
+menu.title.bg.color: #ffffff
+menu.title.text.color: #9999ff
 menu.items.bg: flat solid
-menu.items.bg.color: #383838
-menu.items.text.color: #dadada
+menu.items.bg.color: #ffffff
+menu.items.text.color: #000000
 menu.items.disabled.text.color: #6e6e6e
 menu.items.active.bg: flat solid
-menu.items.active.bg.color: #8fa876
+menu.items.active.bg.color: #9999ff
 menu.items.active.text.color: #ffffff
-menu.items.active.disabled.text.color: #b4c5a3
+menu.items.active.disabled.text.color: #ccccff
 menu.separator.color: #252525
 menu.separator.padding.width: 0
 osd.bg: flat solid
@@ -48,4 +48,4 @@ osd.bg.color: #383838
 osd.unhilight.bg: flat solid
 osd.unhilight.bg.color: #383838
 osd.hilight.bg: flat solid
-osd.hilight.bg.color: #8fa876
+osd.hilight.bg.color: #9999ff
