@@ -343,7 +343,7 @@
       </action>
     </keybind>
 
-    <keybind key="Super_L">
+    <keybind key="C-A-S-W-d">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
