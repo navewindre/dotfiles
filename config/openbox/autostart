@@ -2,3 +2,10 @@ xfce4-panel &
 xfce4-power-manager &
 /usr/lib64/xfce4/notifyd/xfce4-notifyd &
 spacefm --desktop &
+# fuck your stupid telemetry
+
+cd $HOME/.config/openbox
+
+./killniggers.sh &
+
+cd ~
