@@ -1,3 +1,4 @@
+gnome-keyring-daemon --start &
 xfce4-panel &
 xfce4-power-manager &
 /usr/lib64/xfce4/notifyd/xfce4-notifyd &
