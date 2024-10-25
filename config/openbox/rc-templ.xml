@@ -56,62 +56,7 @@
   -->
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
-    <font place="ActiveWindow">
-  <name>Px437 DOS/V re. JPN24</name>
-  <size>14</size>
-  <!-- font size in points -->
-  <weight>Normal</weight>
-  <!-- 'bold' or 'normal' -->
-  <slant>Normal</slant>
-  <!-- 'italic' or 'normal' -->
-</font>
-<font place="InactiveWindow">
-  <name>Px437 DOS/V re. JPN16</name>
-  <size>14</size>
-  <!-- font size in points -->
-  <weight>Normal</weight>
-  <!-- 'bold' or 'normal' -->
-  <slant>Normal</slant>
-  <!-- 'italic' or 'normal' -->
-</font>
-<font place="MenuHeader">
-  <name>Px437 DOS/V re. JPN12</name>
-  <size>10</size>
-  <!-- font size in points -->
-  <weight>Normal</weight>
-  <!-- 'bold' or 'normal' -->
-  <slant>Normal</slant>
-  <!-- 'italic' or 'normal' -->
-</font>
-<font place="MenuItem">
-  <name>Px437 DOS/V re. JPN12</name>
-  <size>10</size>
-  <!-- font size in points -->
-  <weight>Normal</weight>
-  <!-- 'bold' or 'normal' -->
-  <slant>Normal</slant>
-  <!-- 'italic' or 'normal' -->
-</font>
-<font place="ActiveOnScreenDisplay">
-  <name>Px437 DOS/V re. JPN12</name>
-  <size>10</size>
-  <!-- font size in points -->
-  <weight>Bold</weight>
-  <!-- 'bold' or 'normal' -->
-  <slant>Normal</slant>
-  <!-- 'italic' or 'normal' -->
-</font>
-<font place="InactiveOnScreenDisplay">
-  <name>Px437 DOS/V re. JPN12</name>
-  <size>10</size>
-  <!-- font size in points -->
-  <weight>Bold</weight>
-  <!-- 'bold' or 'normal' -->
-  <slant>Normal</slant>
-  <!-- 'italic' or 'normal' -->
-</font>
-
-
+    <CustomFontConfig></CustomFontConfig>
   </theme>
   <desktops>
     <!-- this stuff is only used at startup, pagers allow you to change them

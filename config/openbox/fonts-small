@@ -1,0 +1,8 @@
+#!/usr/bin/node
+
+const fs = require( "fs" );
+
+const smallconf = fs.readFileSync( "./small-templ.xml" );
+const conf = fs.readFileSync( "./rc-templ.xml" ).toString();
+
+fs.writeFileSync( "./rc.xml", conf.replace( "<CustomFontConfig></CustomFontConfig>", smallconf ) );
