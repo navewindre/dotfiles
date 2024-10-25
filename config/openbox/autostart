@@ -1,12 +1,5 @@
-COMPOSITE="$HOME/.config/openbox/composite"
-if [ -f $COMPOSITE ]; then
-  bash $COMPOSITE
-fi
-
-SCREENRES="$HOME/.config/openbox/screenres"
-if [ -f $SCREENRES ]; then
-  bash $SCREENRES
-fi
+CONFDIR=$HOME/.config/openbox
+$CONFDIR/run-autorun
 
 gnome-keyring-daemon --start &
 xfce4-panel &

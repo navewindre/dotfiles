@@ -1,1 +1,1 @@
-cp -r ./* ~/code/dotfiles/config/openbox
+cp ./* ~/code/dotfiles/config/openbox
