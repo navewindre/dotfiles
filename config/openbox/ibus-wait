@@ -1,0 +1,1 @@
+screen -d -m /home/aurelia/.config/openbox/ibus-wait2

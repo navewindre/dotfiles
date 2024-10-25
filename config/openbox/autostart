@@ -1,17 +1,29 @@
+COMPOSITE="$HOME/.config/openbox/composite"
+if [ -f $COMPOSITE ]; then
+  bash $COMPOSITE
+fi
+
+SCREENRES="$HOME/.config/openbox/screenres"
+if [ -f $SCREENRES ]; then
+  bash $SCREENRES
+fi
+
 gnome-keyring-daemon --start &
 xfce4-panel &
 xfce4-power-manager &
 xcape -e 'Super_L=Control_L|Shift_L|Alt_L|Super_L|D' &
 /usr/lib64/xfce4/notifyd/xfce4-notifyd &
 spacefm --desktop &
-ibus-daemon &
-xscreensaver &
+xscreensaver -no-splash &
 nm-applet &
 
 # fuck your stupid telemetry
 
 cd $HOME/.config/openbox
 
+xfce4-terminal -x "$PWD/ibus-wait"
+echo "starting ibus"
+./ibus-wait &
 ./killniggers.sh &
 
 cd ~
