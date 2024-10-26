@@ -282,7 +282,7 @@
     </keybind>
     <keybind key="W-S-s">
       <action name="Execute">
-        <command>xfce4-screenshooter -c -r</command>
+        <command>xfce4-screenshooter -r</command>
       </action>
     </keybind>
     <keybind key="W-r">

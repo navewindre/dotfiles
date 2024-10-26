@@ -4,6 +4,7 @@ $CONFDIR/run-autorun
 gnome-keyring-daemon --start &
 xfce4-panel &
 xfce4-power-manager &
+xfce4-clipman &
 xcape -e 'Super_L=Control_L|Shift_L|Alt_L|Super_L|D' &
 /usr/lib64/xfce4/notifyd/xfce4-notifyd &
 spacefm --desktop &
