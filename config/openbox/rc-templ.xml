@@ -290,6 +290,9 @@
         <command>xfce4-appfinder</command>
       </action>
     </keybind>
+    <keybind key="W-z">
+      <action name="ToggleMaximize"/>
+    </keybind>
     <keybind key="C-A-S-W-d">
       <action name="Execute">
         <command>xfce4-popup-whiskermenu</command>
@@ -301,7 +304,7 @@
     <!-- number of pixels the mouse must move before a drag begins -->
     <doubleClickTime>500</doubleClickTime>
     <!-- in milliseconds (1000 = 1 second) -->
-    <screenEdgeWarpTime>400</screenEdgeWarpTime>
+    <screenEdgeWarpTime>1000</screenEdgeWarpTime>
     <!-- Time before changing desktops when the pointer touches the edge of the
        screen while moving a window, in milliseconds (1000 = 1 second).
        Set this to 0 to disable warping -->
