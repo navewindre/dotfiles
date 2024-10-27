@@ -1,5 +1,7 @@
 let g:mapleader = '\'
 let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
+" fuck zig niggers
+let g:polyglot_disabled = ['autoindent']
 
 lua <<EOF
   local Plug = vim.fn['plug#'];
