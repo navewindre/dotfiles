@@ -3,8 +3,8 @@
         Copy the file to $HOME/.config/openbox/ instead. -->
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
   <resistance>
-    <strength>10</strength>
-    <screen_edge_strength>20</screen_edge_strength>
+    <strength>75</strength>
+    <screen_edge_strength>30</screen_edge_strength>
   </resistance>
   <focus>
     <focusNew>yes</focusNew>
@@ -125,55 +125,6 @@
   </dock>
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
-    <!-- Keybindings for desktop switching -->
-    <keybind key="C-A-Left">
-      <action name="GoToDesktop">
-        <to>left</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Right">
-      <action name="GoToDesktop">
-        <to>right</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Up">
-      <action name="GoToDesktop">
-        <to>up</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Down">
-      <action name="GoToDesktop">
-        <to>down</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Left">
-      <action name="SendToDesktop">
-        <to>left</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Right">
-      <action name="SendToDesktop">
-        <to>right</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Up">
-      <action name="SendToDesktop">
-        <to>up</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Down">
-      <action name="SendToDesktop">
-        <to>down</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
     <keybind key="W-F1">
       <action name="GoToDesktop">
         <to>1</to>
@@ -182,16 +133,6 @@
     <keybind key="W-F2">
       <action name="GoToDesktop">
         <to>2</to>
-      </action>
-    </keybind>
-    <keybind key="W-F3">
-      <action name="GoToDesktop">
-        <to>3</to>
-      </action>
-    </keybind>
-    <keybind key="W-F4">
-      <action name="GoToDesktop">
-        <to>4</to>
       </action>
     </keybind>
     <!-- Keybindings for windows -->
@@ -229,7 +170,6 @@
     </keybind>
     <keybind key="C-A-Tab">
       <action name="NextWindow">
-        <panels>yes</panels>
         <desktop>yes</desktop>
         <finalactions>
           <action name="Focus"/>
@@ -244,6 +184,24 @@
         <x>0</x>
         <y>0</y>
         <width>100%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-q">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-e">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>50%</x>
+        <y>0</y>
+        <width>50%</width>
         <height>50%</height>
       </action>
     </keybind>
@@ -274,10 +232,91 @@
         <height>100%</height>
       </action>
     </keybind>
+    <keybind key="W-z">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>50%</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-c">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>50%</x>
+        <y>50%</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-S-a">
+      <action name="DirectionalCycleWindows">
+        <direction>west</direction>
+        <dialog>yes</dialog>
+        <bar>yes</bar>
+      </action>
+    </keybind>
+    <keybind key="W-S-d">
+      <action name="DirectionalCycleWindows">
+        <direction>east</direction>
+        <dialog>yes</dialog>
+        <bar>yes</bar>
+      </action>
+    </keybind>
+    <keybind key="W-S-s">
+      <action name="DirectionalCycleWindows">
+        <direction>south</direction>
+        <dialog>yes</dialog>
+        <bar>yes</bar>
+      </action>
+    </keybind>
+    <keybind key="W-S-w">
+      <action name="DirectionalCycleWindows">
+        <direction>north</direction>
+        <dialog>yes</dialog>
+        <bar>yes</bar>
+      </action>
+    </keybind>
+    <keybind key="W-S-q">
+    <action name="DirectionalCycleWindows">
+      <direction>northwest</direction>
+      <dialog>yes</dialog>
+      <bar>yes</bar>
+    </action>
+    </keybind>
+    <keybind key="W-S-e">
+    <action name="DirectionalCycleWindows">
+      <direction>northeast</direction>
+      <dialog>yes</dialog>
+      <bar>yes</bar>
+    </action>
+    </keybind>
+    <keybind key="W-S-c">
+    <action name="DirectionalCycleWindows">
+      <direction>southeast</direction>
+      <dialog>yes</dialog>
+      <bar>yes</bar>
+    </action>
+    </keybind>
+    <keybind key="W-S-z">
+    <action name="DirectionalCycleWindows">
+      <direction>southwest</direction>
+      <dialog>yes</dialog>
+      <bar>yes</bar>
+    </action>
+    </keybind>
+
+    <keybind key="W-C-x">
+      <action name="Move"></action>
+    </keybind>
+    <keybind key="W-S-r">
+      <action name="Resize"></action>
+    </keybind>
     <!-- Keybindings for running applications -->
-    <keybind key="W-e">
+    <keybind key="W-t">
       <action name="Execute">
-        <command>spacefm -w</command>
+        <command>xfce4-terminal</command>
       </action>
     </keybind>
     <keybind key="W-S-s">
@@ -287,10 +326,10 @@
     </keybind>
     <keybind key="W-r">
       <action name="Execute">
-        <command>xfce4-appfinder</command>
+        <command>xfce4-appfinder -c</command>
       </action>
     </keybind>
-    <keybind key="W-z">
+    <keybind key="W-x">
       <action name="ToggleMaximize"/>
     </keybind>
     <keybind key="C-A-S-W-d">

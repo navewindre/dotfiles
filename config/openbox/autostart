@@ -10,6 +10,7 @@ xcape -e 'Super_L=Control_L|Shift_L|Alt_L|Super_L|D' &
 spacefm --desktop &
 xscreensaver -no-splash &
 nm-applet &
+$CONFDIR/cortile &
 
 # fuck your stupid telemetry
 
