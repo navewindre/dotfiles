@@ -1,1 +1,2 @@
-screen -d -m /home/aurelia/.config/openbox/ibus-wait2
+#!/bin/bash
+screen -d -m $HOME/.config/openbox/ibus-wait2
