@@ -319,7 +319,7 @@
         <command>xfce4-terminal</command>
       </action>
     </keybind>
-    <keybind key="W-S-s">
+    <keybind key="W-C-s">
       <action name="Execute">
         <command>xfce4-screenshooter -r</command>
       </action>
