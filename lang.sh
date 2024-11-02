@@ -2,6 +2,9 @@
 
 ENGINES=$(ibus engine)
 case "$ENGINES" in
+  *en*)
+    echo "EN"
+    ;;
   *pl*)
     echo "PL"
     ;;

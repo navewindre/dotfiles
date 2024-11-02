@@ -2,8 +2,8 @@
 
 ARCH=$(lscpu | awk -F ':' 'NR==1 {print $NF}' | tr -d ' ')
 if [[ "$ARCH" == "x86_64" ]]; then
-    ./cortile-x86
+    $("$HOME/.config/openbox/cortile-x86")
 fi
 if [[ "$ARCH" == "aarch64" ]]; then
-    ./cortile-arm64
+    $("$HOME/.config/openbox/cortile-arm64")
 fi
