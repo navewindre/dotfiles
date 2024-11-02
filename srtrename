@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Enable debug output
+set -x
+
+# Loop through all subtitle files
+for srt in *.srt; do
+    # Skip if no .srt files found
+    [[ -f "$srt" ]] || { echo "No .srt files found"; exit 1; }
+    
+    echo "Processing subtitle file: $srt"
+    
+    # Extract the episode number (S01E04) - more specific pattern
+    episode=$(echo "$srt" | grep -o "S[0-9]\{2\}E[0-9]\{2\}")
+    echo "Extracted episode number: $episode"
+    
+    # Find the corresponding video file
+    video_file=$(find . -maxdepth 1 -type f -name "*${episode}*.mkv")
+    echo "Found video file: $video_file"
+    
+    # If a matching video file is found
+    if [[ -n "$video_file" ]]; then
+        # Remove the .mkv extension and leading ./
+        video_basename=$(basename "$video_file" .mkv)
+        # Create new subtitle name
+        new_name="${video_basename}.srt"
+        
+        echo "Will rename '$srt' to '$new_name'"
+        
+        # Only rename if the new name is different
+        if [[ "$srt" != "$new_name" ]]; then
+            mv -v "$srt" "$new_name"
+        else
+            echo "File already has the correct name"
+        fi
+    else
+        echo "No matching video file found for '$srt'"
+        # List all mkv files for debugging
+        echo "Available mkv files:"
+        ls -l *.mkv
+    fi
+done
