@@ -136,6 +136,9 @@
       </action>
     </keybind>
     <!-- Keybindings for windows -->
+    <keybind key="W-C-q">
+      <action name="Close"/>
+    </keybind>
     <keybind key="A-F4">
       <action name="Close"/>
     </keybind>
