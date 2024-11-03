@@ -440,9 +440,7 @@
         <action name="Unshade"/>
       </mousebind>
       <mousebind button="Middle" action="Press">
-        <action name="Lower"/>
-        <action name="FocusToBottom"/>
-        <action name="Unfocus"/>
+        <action name="Close"/>
       </mousebind>
       <mousebind button="Right" action="Press">
         <action name="Focus"/>
