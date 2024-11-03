@@ -133,51 +133,23 @@ proportion_decrease = "Mod4-2"
 [corners]                                # Action strings from [keys] section. #
 ################################################################################
 
-# Corner at top left.
-top_left = "window_previous"
-
-# Corner at top center.
+top_left = ""
 top_center = ""
-
-# Corner at top right.
-top_right = "master_make"
-
-# Corner at center right.
+top_right = ""
 center_right = ""
-
-# Corner at bottom right.
-bottom_right = "proportion_increase"
-
-# Corner at bottom center.
+bottom_right = ""
 bottom_center = ""
-
-# Corner at bottom left.
-bottom_left = "proportion_decrease"
-
-# Corner at center left.
+bottom_left = ""
 center_left = ""
 
 ################################################################################
 [systray]                                # Action strings from [keys] section. #
 ################################################################################
 
-# Icon left click with pointer.
 click_left = ""
-
-# Icon middle click with pointer.
 click_middle = "toggle"
-
-# Icon right click with pointer.
 click_right = ""
-
-# Icon vertical scroll up with pointer.
 scroll_up = "cycle_previous"
-
-# Icon vertical scroll down with pointer.
 scroll_down = "cycle_next"
-
-# Icon horizontal scroll left with pointer.
 scroll_left = "proportion_decrease"
-
-# Icon horizontal scroll right with pointer.
 scroll_right = "proportion_increase"
