@@ -3,6 +3,7 @@ let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 " fuck zig niggers
 let g:polyglot_disabled = ['autoindent']
 
+
 lua <<EOF
   local Plug = vim.fn['plug#'];
   vim.call('plug#begin');
@@ -288,10 +289,13 @@ set mousemodel=popup
 set noshowmode
 set termguicolors
 set title
+set foldnestmax=1
+set foldlevel=10000
+set foldmethod=indent
 set smartcase
 set showtabline=2
 set nocompatible
-set signcolumn=no
+set signcolumn=number
 filetype plugin on
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_enable_debug_logging = 0
@@ -324,6 +328,54 @@ let g:lightline = {
     \ }
 \ }
 
+" Relative Line Numbers in Sign Column (0-9 only, 0 for current line)
+" Place this in ~/.vim/plugin/relative_sign_numbers.vim
+
+if exists('g:loaded_relative_sign_numbers')
+    finish
+endif
+let g:loaded_relative_sign_numbers = 1
+
+" Save signs state
+let s:signs = {}
+
+function! s:UpdateSignColumn()
+    execute 'sign unplace * group=RelativeLineNumbers'
+    let disallowed_langs = []
+    if index(disallowed_langs, &filetype) >= 0
+      return
+    endif
+    let l:cur_line = line('.')
+    let l:last_line = line('$')
+
+    if !has_key(s:signs, 0)
+        execute 'sign define RelNum0 text=0 texthl=LineNr'
+        let s:signs[0] = 1
+    endif
+
+    for l:lnum in range(1, l:last_line)
+        if l:lnum != l:cur_line 
+            let l:distance = abs(l:cur_line - l:lnum)
+            if l:distance > 0 && l:distance <= 9
+                if !has_key(s:signs, l:distance)
+                    execute 'sign define RelNum' . l:distance . ' text=' . l:distance . ' texthl=LineNr'
+                    let s:signs[l:distance] = 1
+                endif
+                execute 'sign place ' . l:lnum . ' line=' . l:lnum . 
+                      \' name=RelNum' . l:distance . 
+                      \' group=RelativeLineNumbers buffer=' . bufnr('')
+            endif
+        endif
+    endfor
+endfunction
+
+augroup RelativeSignNumbers
+    autocmd!
+    autocmd BufEnter,WinEnter,CursorMoved,CursorMovedI * call s:UpdateSignColumn()
+augroup END
+
+command! EnableRelativeSignNumbers call s:UpdateSignColumn()
+command! DisableRelativeSignNumbers execute 'sign unplace * group=RelativeLineNumbers'
 let g:lightline.component_raw = {'buffers': 1}
 let g:lightline#bufferline#clickable = 1
 let g:lightline#bufferline#show_number = 2
@@ -592,6 +644,7 @@ hi def link @lsp.type.keywordLiteral.zig Special
 hi def link @lsp.type.string.zig NONE
 hi @type.builtin.cpp guifg=#ea5ce2
 hi SpecialChar ctermfg=9 guifg=#e4600e
+hi SignColumn guibg=#000000
 
 let g:vim_json_conceal=0
 let g:markdown_syntax_conceal=0
@@ -602,7 +655,7 @@ let NERDTreeQuitOnOpen=1
 autocmd BufNewFile,BufRead *.zig set shiftwidth=2
 autocmd BufNewFile,BufRead *.modelfile set ft=gotmpl
 
-aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.Inspect
 aunmenu PopUp.-1-
-aunmenu PopUp.-2-
+aunmenu PopUp.How-to\ disable\ mouse
+anoremenu PopUp.Inspect <Cmd>Inspect<CR>
