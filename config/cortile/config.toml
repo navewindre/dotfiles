@@ -128,7 +128,8 @@ slave_increase = "Shift-Mod4-3"
 slave_decrease = "Shift-Mod4-2"
 proportion_increase = "Mod4-3"
 proportion_decrease = "Mod4-2"
-
+position_next = "Mod4-Mod1-S"
+position_previous = "Mod4-Mod1-W"
 ################################################################################
 [corners]                                # Action strings from [keys] section. #
 ################################################################################
