@@ -581,6 +581,11 @@ function! GFLine()
   endif
 endfunction
 
+nnoremap <leader>c "+yy
+vnoremap <leader>c "+y
+nnoremap <leader>p "+gP
+vnoremap <leader>p "+P
+
 nnoremap gf :call GFLine()<CR>
 vnoremap <leader>ap :call AddSpacesToParentheses()<CR>
 

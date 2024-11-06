@@ -1,3 +1,5 @@
+source ~/.lscolors
+source ~/.profile
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -13,10 +15,31 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  zsh-colorls
 )
 
+git_prompt() {
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    local branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+    if [ -z "$branch" ]; then
+      branch=$(git rev-parse --short HEAD 2>/dev/null)
+      if [[ ! -z "$branch" ]]; then
+        echo "@${branch} (detached)"
+      fi
+    else
+      if [[ "$branch" == "main" ]]; then
+        echo ''
+      else
+        echo "%F{#FFFFFF}@%b%F{#505050}${branch}%F{#FFFFFF}"
+      fi
+    fi
+  fi
+}
+
+setopt PROMPT_SUBST
+
 source $ZSH/oh-my-zsh.sh
+export PS1=$'%m :: %2~$(git_prompt) %B»%b '
 
 # User configuration
 
@@ -27,6 +50,7 @@ alias vi=nvim
 alias mpa="mpv --no-video"
 
 alias l='ls'
+alias ll='ls -lahG'
 alias lg='lazygit'
 
 export ANDROID_HOME=/media/aurelia/data/android-projects
@@ -50,3 +74,4 @@ if [ -f '/home/aurelia/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/aur
 
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+
