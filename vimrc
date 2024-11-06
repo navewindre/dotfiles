@@ -3,7 +3,6 @@ let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 " fuck zig niggers
 let g:polyglot_disabled = ['autoindent']
 
-
 lua <<EOF
   local Plug = vim.fn['plug#'];
   vim.call('plug#begin');
@@ -306,7 +305,7 @@ let g:lightline = {
     \             [ 'readonly', 'filename', 'modified' ] ],
     \   'right': [ [ 'lineinfo' ],
     \              [ 'percent' ],
-    \              [ 'fmtcustom', 'enccustom', 'ftcustom', 'wpm' ] ]
+    \              [ 'fmtcustom', 'tabbycustom', 'enccustom', 'ftcustom', 'wpm' ] ]
     \ },
     \ 'tabline': {
     \   'left': [ ['buffers'] ],
@@ -324,7 +323,8 @@ let g:lightline = {
     \   'ftcustom': 'CustomFT',
     \   'enccustom': 'CustomEncode',
     \   'fmtcustom': 'CustomFileFormat',
-    \   'tabscustom': 'CustomTabs'
+    \   'tabscustom': 'CustomTabs',
+    \   'tabbycustom': 'TabbyStatus'
     \ }
 \ }
 
@@ -428,6 +428,32 @@ function WPM()
     return (luaeval("require('wpm').historic_graph()") . ' ' . luaeval("require('wpm').wpm()")) . 'wpm'
   endif
   return ''
+endfunction
+
+function TabbyStatus()
+  if !exists("g:tabby_inline_completion_trigger")
+    let g:tabby_inline_completion_trigger = 'auto'
+  endif
+  if g:tabby_inline_completion_trigger == 'auto'
+    return ''
+  endif
+  if g:tabby_inline_completion_trigger == 'manual'
+    return 'ai: manual'
+  endif
+  return 'ai: off'
+endfunction
+
+function ToggleTabby()
+  if !exists("g:tabby_inline_completion_trigger")
+    let g:tabby_inline_completion_trigger = 'auto'
+  endif
+  if g:tabby_inline_completion_trigger == 'auto'
+    let g:tabby_inline_completion_trigger = 'manual'
+  elseif g:tabby_inline_completion_trigger == 'off'
+    let g:tabby_inline_completion_trigger = 'auto'
+  else
+    let g:tabby_inline_completion_trigger = 'off'
+  endif
 endfunction
 
 function! TablineTabs()
@@ -623,6 +649,9 @@ vnoremap [[ ?{<CR>:<C-u>nohl<CR>gv
 vnoremap ]] /}<CR>:<C-u>nohl<CR>gv
 vnoremap ][ /{<CR>:<C-u>nohl<CR>gv
 vnoremap [] ?}<CR>:<C-u>nohl<CR>gv
+
+nnoremap <C-l> <C-i>
+nnoremap <leader>ta :call ToggleTabby()<CR>
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
