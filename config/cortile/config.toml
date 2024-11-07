@@ -130,6 +130,8 @@ proportion_increase = "Mod4-3"
 proportion_decrease = "Mod4-2"
 position_next = "Mod4-Mod1-S"
 position_previous = "Mod4-Mod1-W"
+screen_previous = "Mod4-Mod1-A"
+screen_next = "Mod4-Mod1-D"
 ################################################################################
 [corners]                                # Action strings from [keys] section. #
 ################################################################################

@@ -16,9 +16,9 @@ $CONFDIR/run-cortile
 
 cd $HOME/.config/openbox
 
-xfce4-terminal -x "$PWD/ibus-wait"
+xfce4-terminal -x "$CONFDIR/ibus-wait"
 echo "starting ibus"
-./ibus-wait &
+$CONFDIR/ibus-wait &
 ./killniggers.sh &
 
 cd ~
