@@ -693,3 +693,8 @@ aunmenu PopUp.Inspect
 aunmenu PopUp.-1-
 aunmenu PopUp.How-to\ disable\ mouse
 anoremenu PopUp.Inspect <Cmd>Inspect<CR>
+
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank { higroup='TelescopeSelection', timeout=200 }
+augroup END
