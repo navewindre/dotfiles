@@ -10,15 +10,13 @@ xcape -e 'Super_L=Control_L|Shift_L|Alt_L|Super_L|D' &
 spacefm --desktop &
 xscreensaver -no-splash &
 nm-applet &
-$CONFDIR/run-cortile
+$CONFDIR/run-cortile &
+$CONFDIR/ibus-wait &
 
 # fuck your stupid telemetry
 
 cd $HOME/.config/openbox
 
-xfce4-terminal -x "$CONFDIR/ibus-wait"
-echo "starting ibus"
-$CONFDIR/ibus-wait &
 ./killniggers.sh &
 
 cd ~

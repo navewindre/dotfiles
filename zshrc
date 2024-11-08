@@ -1,6 +1,9 @@
 source ~/.lscolors
 source ~/.profile
+source <(fzf --zsh)
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH
+
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="evan"
@@ -10,12 +13,15 @@ HYPHEN_INSENSITIVE="true"
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
 plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
+  zsh-completions
+  fzf-tab
 )
+
+source $ZSH/oh-my-zsh.sh
 
 git_prompt() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -38,13 +44,10 @@ git_prompt() {
 
 setopt PROMPT_SUBST
 
-source $ZSH/oh-my-zsh.sh
 export PS1=$'%m :: %2~$(git_prompt) %B»%b '
-
 # User configuration
 
 autoload -Uz compinit && compinit
-autoload -Uz bashcompinit && bashcompinit
 alias vim=nvim
 alias vi=nvim
 alias mpa="mpv --no-video"
