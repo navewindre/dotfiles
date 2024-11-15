@@ -327,7 +327,12 @@
     </keybind>
     <keybind key="W-C-s">
       <action name="Execute">
-        <command>xfce4-screenshooter -r</command>
+        <command>scrot -s -e 'xclip -selection clipboard -t image/png -i $f'</command>
+      </action>
+    </keybind>
+    <keybind key="W-C-e">
+      <action name="Execute">
+        <command>ocr</command>
       </action>
     </keybind>
     <keybind key="W-r">

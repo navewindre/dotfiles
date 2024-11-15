@@ -1,15 +1,27 @@
 CONFDIR=$HOME/.config/openbox
 $CONFDIR/run-autorun
 
+pkill -9 -f gnome-keyring-daemon
 gnome-keyring-daemon --start &
+pkill -9 -f polkit-gnome-authentication-agent-1
+/usr/libexec/polkit-gnome-authentication-agent-1 &
+pkill -9 -f xfce4-panel
 xfce4-panel &
+pkill -9 -f xfce4-power-manager
 xfce4-power-manager &
+pkill -9 -f xfce4-clipman
 xfce4-clipman &
+pkill -9 -f xcape
 xcape -e 'Super_L=Control_L|Shift_L|Alt_L|Super_L|D' &
+pkill -9 -f xfce4-notifyd
 /usr/lib64/xfce4/notifyd/xfce4-notifyd &
+pkill -9 -f spacefm
 spacefm --desktop &
 xscreensaver -no-splash &
+pkill -9 -f nm-applet
 nm-applet &
+pkill -9 -f cortile-x86
+pkill -9 -f cortile-arm64
 $CONFDIR/run-cortile &
 $CONFDIR/ibus-wait &
 
