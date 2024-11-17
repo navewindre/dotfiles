@@ -40,6 +40,12 @@ const setupws = () => {
     if( parsed.options.state != 'playing' )
       ret = '(⏸) ';
 
+    const artist = parsed.options.playing_track.artist;
+    if( artist && artist.length > 0 ) {
+      ret += artist;
+      ret += ' - ';
+    }
+
     const homedir = require( "os" ).homedir();
     if( title.startsWith( homedir ) ) {
       const path = title.substring( homedir.length + 1 );
