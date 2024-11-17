@@ -1,2 +1,4 @@
 icons/NineIcons/Iconfactory
 config/openbox/rc.xml
+nowplaying/node_modules
+nowplaying/package-lock.json
