@@ -36,7 +36,7 @@ lua <<EOF
   Plug('jcdickinson/wpm.nvim')
   Plug('puremourning/vimspector')
 
-  Plug('yetone/avante.nvim', { ['branch'] = 'main', ['do'] = function() require('avante.api').build() end } )
+  Plug('yetone/avante.nvim', { ['branch'] = 'main', ['do'] = 'make' } )
   vim.call('plug#end');
 
   -- Set up nvim-cmp.
@@ -132,6 +132,7 @@ lua <<EOF
   })
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  capabilities.offsetEncoding = "utf-16"
   require('lspconfig')['clangd'].setup {
     capabilities = capabilities
   }
@@ -244,7 +245,7 @@ lua <<EOF
     vendors = {
      ---@type AvanteProvider
       ollama = {
-        ["local"] = true,
+        api_key_name = '',
         endpoint = "127.0.0.1:11434/v1",
         -- model = 'qwen2.5:7b-instruct-q4_K_M',
         model = 'qwen2.5-coder:7b-instruct-q5_K_M',
@@ -294,7 +295,9 @@ set foldmethod=indent
 set smartcase
 set showtabline=2
 set nocompatible
+set guicursor+=i:-blinkwait175-blinkoff150-blinkon175
 set signcolumn=number
+
 filetype plugin on
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_enable_debug_logging = 0
@@ -353,7 +356,17 @@ function! s:UpdateSignColumn()
         let s:signs[0] = 1
     endif
 
-    for l:lnum in range(1, l:last_line)
+    let l:start = 1
+    if l:cur_line > 10
+        let l:start = l:cur_line - 10
+    endif
+
+    let l:end = l:cur_line + 10
+    if l:end > l:last_line
+        let l:end = l:last_line
+    endif
+
+    for l:lnum in range(l:start, l:end)
         if l:lnum != l:cur_line 
             let l:distance = abs(l:cur_line - l:lnum)
             if l:distance > 0 && l:distance <= 9
@@ -671,6 +684,8 @@ hi PmenuSel guibg=#ffffff guifg=#202020
 hi Variable guifg=#40FF40 ctermfg=Green
 hi @variable guifg=#40FF40 ctermfg=Green
 hi Identifier guifg=#27ea91
+hi def link @lsp.typemod.variable.defaultLibrary.javascriptreact Special
+hi def link @lsp.typemod.variable.defaultLibrary.typescriptreact Special
 hi def link @lsp.typemod.variable.defaultLibrary.javascript Special
 hi def link @lsp.typemod.variable.defaultLibrary.typescript Special
 hi def link @punctuation.special.javascript Delimiter

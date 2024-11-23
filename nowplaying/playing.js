@@ -2,13 +2,8 @@
 
 const WebSocket = require( "ws" );
 
-process.on( "uncaughtException", () => {
-  console.log();
-} );
-
-process.on( "unhandledRejection", () => {
-  console.log();
-} );
+process.on( "uncaughtException", () => { console.log(); } );
+process.on( "unhandledRejection", () => { console.log(); } );
 
 let ws = null;
 let idc = 1;
@@ -46,10 +41,8 @@ const setupws = () => {
       ret += ' - ';
     }
 
-    const homedir = require( "os" ).homedir();
-    if( title.startsWith( homedir ) ) {
-      const path = title.substring( homedir.length + 1 );
-      const file = path.split( "/" ).pop();
+    if( title.startsWith( '/' ) ) {
+      const file = title.split( "/" ).pop();
       ret += file;
     }
     else ret += title;
@@ -73,6 +66,4 @@ const sendreq = () => {
   ws.send( JSON.stringify( obj ) );
 }
 
-try {
-  setupws();
-} catch ( e ) {}
+setupws();
