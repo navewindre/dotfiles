@@ -35,6 +35,7 @@ lua <<EOF
   Plug('HakonHarnes/img-clip.nvim')
   Plug('jcdickinson/wpm.nvim')
   Plug('puremourning/vimspector')
+  -- Plug('github/copilot.vim')
 
   Plug('yetone/avante.nvim', { ['branch'] = 'main', ['do'] = 'make' } )
   vim.call('plug#end');
@@ -599,10 +600,16 @@ vnoremap <leader>c "+y
 nnoremap <leader>p "+gP
 vnoremap <leader>p "+P
 
+nnoremap <leader>f :lua vim.lsp.buf.code_action()<CR>
+vnoremap <leader>f :lua vim.lsp.buf.code_action()<CR>
+
+nnoremap <leader>rs :lua vim.lsp.buf.rename()<CR>
+vnoremap <leader>rs :lua vim.lsp.buf.rename()<CR>
+
 nnoremap gf :call GFLine()<CR>
 vnoremap <leader>ap :call AddSpacesToParentheses()<CR>
 
-autocmd BufReadPost * call TurnOffDiag()
+autocmd BufReadPost,BufNew * call TurnOffDiag()
 
 nnoremap <CR> :noh<CR><CR>
 
@@ -668,8 +675,12 @@ vnoremap ]] /}<CR>:<C-u>nohl<CR>gv
 vnoremap ][ /{<CR>:<C-u>nohl<CR>gv
 vnoremap [] ?}<CR>:<C-u>nohl<CR>gv
 
-nnoremap <C-l> <C-i>
+nnoremap <C-j> <C-i>
 nnoremap <leader>ta :call ToggleTabby()<CR>
+
+xnoremap ip :<C-u>silent! normal! T,vt,<CR>
+onoremap ip :<C-u>silent! normal! T,vt,<CR>
+
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
@@ -703,6 +714,7 @@ let NERDTreeQuitOnOpen=1
 
 autocmd BufNewFile,BufRead *.zig set shiftwidth=2
 autocmd BufNewFile,BufRead *.modelfile set ft=gotmpl
+autocmd BufNewFile,BufRead *.vsh set ft=glsl
 
 aunmenu PopUp.Inspect
 aunmenu PopUp.-1-

@@ -327,7 +327,7 @@
     </keybind>
     <keybind key="W-C-s">
       <action name="Execute">
-        <command>scrot -s -e 'xclip -selection clipboard -t image/png -i $f'</command>
+        <command>scrot -s -e 'xclip -selection clipboard -t image/png -i $f &amp;&amp; rm $f'</command>
       </action>
     </keybind>
     <keybind key="W-C-e">

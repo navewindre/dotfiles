@@ -1,7 +1,8 @@
-source ~/.lscolors
-source ~/.profile
-source <(fzf --zsh)
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools-bin
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
@@ -17,8 +18,6 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  zsh-completions
-  fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -56,19 +55,25 @@ alias l='ls'
 alias ll='ls -lahG'
 alias lg='lazygit'
 
-export ANDROID_HOME=/media/aurelia/data/android-projects
+alias musik='musikcube'
+
+export ANDROID_HOME=/media/data/android-projects
 
 export MANPATH="/usr/local/man:$MANPATH"
 
 export EDITOR='nvim'
 export ARCHFLAGS="-arch x86_64"
 
-OLLAMA_HOME="/media/aurelia/dev/ollama"
-OLLAMA_MODELS="/media/aurelia/dev/ollama/models"
+OLLAMA_HOME="/media/dev/ollama"
+OLLAMA_MODELS="/media/dev/ollama/models"
 export OLLAMA_HOME
 export OLLAMA_MODELS
 
 EMSDK_QUIET=1 source $HOME/code/emsdk/emsdk_env.sh
+
+alias pkg='sudo slpkg --repository="*"'
+alias sbopkg='sudo slpkg --repository="sbo"'
+alias slpkg="sudo slpkg"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/aurelia/google-cloud-sdk/path.zsh.inc' ]; then . '/home/aurelia/google-cloud-sdk/path.zsh.inc'; fi
@@ -78,3 +83,7 @@ if [ -f '/home/aurelia/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/aur
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
+source ~/.lscolors
+source ~/.profile
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
