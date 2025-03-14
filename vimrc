@@ -13,12 +13,12 @@ lua <<EOF
   Plug('hrsh7th/cmp-buffer')
   Plug('hrsh7th/cmp-path')
   Plug('hrsh7th/cmp-cmdline')
+  Plug('stevearc/vim-arduino')
   Plug('hrsh7th/nvim-cmp')
   Plug('itchyny/lightline.vim')
   Plug('mengelbrecht/lightline-bufferline')
   Plug('preservim/nerdtree')
   Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-  Plug('nvim-lua/plenary.nvim')
   Plug('nvim-telescope/telescope.nvim', { tag = '0.1.8' })
   Plug('hrsh7th/cmp-vsnip')
   Plug('hrsh7th/vim-vsnip')
@@ -27,8 +27,8 @@ lua <<EOF
   Plug('johnfrankmorgan/whitespace.nvim')
   Plug('sheerun/vim-polyglot')
   Plug('dense-analysis/ale')
-  Plug('stevearc/dressing.nvim')
   Plug('nvim-lua/plenary.nvim')
+  Plug('stevearc/dressing.nvim')
   Plug('MunifTanjim/nui.nvim')
   Plug('MeanderingProgrammer/render-markdown.nvim')
   Plug('nvim-tree/nvim-web-devicons')
@@ -161,6 +161,14 @@ lua <<EOF
     capabilities = capabilities
   }
 
+  require('lspconfig')['vala_ls'].setup {
+    capabilities = capabilities
+  }
+
+  require('lspconfig')['arduino_language_server'].setup {
+    capabilities = capabilities
+  }
+
   vim.diagnostic.config({
     signs = false
   })
@@ -242,8 +250,15 @@ lua <<EOF
         insert = "<C-s>",
       },
     },
-    provider = "ollama",
+    provider = "openai_mini",
     vendors = {
+     ---@type AvanteProvider
+      openai_mini = {
+        __inherited_from = "openai",
+        model = "gpt-4o-mini",
+        timeout = 30,
+        max_tokens = 10000,
+      },
      ---@type AvanteProvider
       ollama = {
         api_key_name = '',
@@ -269,7 +284,7 @@ lua <<EOF
            },
            body = {
              model = opts.model,
-             messages = require("avante.providers").copilot.parse_message(code_opts), -- you can make your own message, but this is very advanced
+             messages = require("avante.providers").openai.parse_messages(code_opts), -- you can make your own message, but this is very advanced
              max_tokens = 20000,
              stream = true,
            },
@@ -588,7 +603,6 @@ function! GFLine()
   let parts = split(file_line, '#L')
   if len(parts) > 1
       execute 'e +' . parts[1] . ' ' . parts[0] | sleep 200m
-      execute('call lightline#bufferline#go_next()')
       set number
   else
       normal! gf
@@ -613,9 +627,9 @@ autocmd BufReadPost,BufNew * call TurnOffDiag()
 
 nnoremap <CR> :noh<CR><CR>
 
-nnoremap <C-e> :NERDTree<CR>
-inoremap <C-e> <Esc>:NERDTree<CR>
-vnoremap <C-e> <Esc>:NERDTree<CR>
+nnoremap <C-e> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
+inoremap <C-e> <Esc>:NERDTreeMirror<CR>:NERDTreeFocus<CR>
+vnoremap <C-e> <Esc>:NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 nnoremap <Esc> :call Q()<CR>
 tnoremap <Esc> <C-\><C-n>
@@ -644,6 +658,7 @@ nnoremap <C-x> :Telescope marks<CR>
 nnoremap <F4> :lua ToggleDiagnostics()<CR>
 
 nnoremap <F7> :VimspectorReset<CR>
+nnoremap <F12> :VimspectorToggle
 nnoremap <leader>b :VimspectorBreakpoints<CR>
 nnoremap <leader>d :VimspectorDisassemble<CR>
 nnoremap <leader>[ <Plug>VimspectorUpFrame
@@ -681,6 +696,13 @@ nnoremap <leader>ta :call ToggleTabby()<CR>
 xnoremap ip :<C-u>silent! normal! T,vt,<CR>
 onoremap ip :<C-u>silent! normal! T,vt,<CR>
 
+nnoremap <S-Up> <C-u>
+nnoremap <S-Down> <C-d>
+vnoremap <S-Up> <C-u>
+vnoremap <S-Down> <C-d>
+
+inoremap <S-Up> <Esc><C-u>i
+inoremap <S-Down> <Esc><C-d>i
 
 colorscheme base16-synth-midnight-dark
 hi LineNr guibg=#000000
@@ -702,6 +724,7 @@ hi def link @lsp.typemod.variable.defaultLibrary.typescript Special
 hi def link @punctuation.special.javascript Delimiter
 hi def link @lsp.type.keywordLiteral.zig Special
 hi def link @lsp.type.string.zig NONE
+hi def link @type.builtin.arduino Keyword
 hi @type.builtin.cpp guifg=#ea5ce2
 hi SpecialChar ctermfg=9 guifg=#e4600e
 hi SignColumn guibg=#000000
@@ -711,6 +734,8 @@ let g:markdown_syntax_conceal=0
 let g:indentLine_color_term=239
 let g:indentLine_color_gui='#141414'
 let NERDTreeQuitOnOpen=1
+let NERDTreeWinSize=36
+let NERDTreeMinimalUI=1
 
 autocmd BufNewFile,BufRead *.zig set shiftwidth=2
 autocmd BufNewFile,BufRead *.modelfile set ft=gotmpl
