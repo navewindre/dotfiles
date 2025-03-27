@@ -15,11 +15,6 @@ trap cleanup SIGINT SIGTERM
 ffmpeg -f pulse -i alsa_output.usb-FX-AUDIO-_DAC-X3PRO_20313330544D4319001C8004-00.analog-stereo.monitor /tmp/desktop_audio_temp.mp3 &
 
 FFMPEG_PID=$!
-while true; do
-    read -t 0.1 -n 1 key
-    if [[ $key == $'\e' ]]; then
-        cleanup
-    fi
-done
+xev | grep -q "keycode: 9" && cleanup
 
 wait $FFMPEG_PID
