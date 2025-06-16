@@ -6,6 +6,7 @@ if [[ $1 != '' ]]; then
 fi
 
 useradd $user
+mkdir -p /home/$user
 echo "created user $user"
 passwd $user
 
