@@ -1,0 +1,6 @@
+Command=/home/aura/code/dotfiles/nowplaying/playing.js
+UseLabel=0
+Text=(genmon)
+UpdatePeriod=5000
+Font=Px437 DOS/V re. JPN12 10
+

@@ -1,0 +1,248 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <value type="int" value="2"/>
+    <property name="dark-mode" type="bool" value="false"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=6;x=2240;y=14"/>
+      <property name="length" type="double" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="icon-size" type="uint" value="16"/>
+      <property name="size" type="uint" value="26"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="3"/>
+        <value type="int" value="2"/>
+        <value type="int" value="7"/>
+        <value type="int" value="5"/>
+        <value type="int" value="11"/>
+        <value type="int" value="16"/>
+        <value type="int" value="19"/>
+        <value type="int" value="1"/>
+        <value type="int" value="6"/>
+        <value type="int" value="10"/>
+        <value type="int" value="9"/>
+        <value type="int" value="12"/>
+      </property>
+      <property name="output-name" type="string" value="DP-0"/>
+    </property>
+    <property name="panel-2" type="empty">
+      <property name="position" type="string" value="p=6;x=640;y=14"/>
+      <property name="size" type="uint" value="26"/>
+      <property name="length" type="double" value="100"/>
+      <property name="enable-struts" type="bool" value="true"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="4"/>
+        <value type="int" value="13"/>
+        <value type="int" value="8"/>
+        <value type="int" value="15"/>
+        <value type="int" value="17"/>
+        <value type="int" value="18"/>
+        <value type="int" value="21"/>
+        <value type="int" value="20"/>
+      </property>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="output-name" type="string" value="HDMI-0"/>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-2" type="string" value="tasklist">
+      <property name="grouping" type="bool" value="false"/>
+      <property name="show-labels" type="bool" value="false"/>
+      <property name="flat-buttons" type="bool" value="false"/>
+      <property name="show-handle" type="bool" value="false"/>
+      <property name="show-tooltips" type="bool" value="true"/>
+      <property name="middle-click" type="uint" value="1"/>
+      <property name="show-wireframes" type="bool" value="false"/>
+      <property name="include-all-workspaces" type="bool" value="false"/>
+    </property>
+    <property name="plugin-5" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+      <property name="expand" type="bool" value="true"/>
+    </property>
+    <property name="plugin-6" type="string" value="systray">
+      <property name="square-icons" type="bool" value="true"/>
+      <property name="known-legacy-items" type="array">
+        <value type="string" value="obs"/>
+        <value type="string" value="networkmanager アプレット"/>
+        <value type="string" value="steam"/>
+        <value type="string" value="xfce4-power-manager"/>
+        <value type="string" value="ibus パネル"/>
+        <value type="string" value="ネットワーク接続がありません"/>
+        <value type="string" value="ethernet ネットワーク接続 &apos;wired connection 2&apos; はアクティブです"/>
+        <value type="string" value="discord"/>
+        <value type="string" value="ibus panel"/>
+        <value type="string" value="ibus-ui-gtk3"/>
+        <value type="string" value="clipman"/>
+        <value type="string" value="ethernet network connection “wired connection 2” active"/>
+        <value type="string" value="no network connection"/>
+        <value type="string" value="networking disabled"/>
+        <value type="string" value="hp-systray"/>
+        <value type="string" value="networkmanager applet"/>
+      </property>
+      <property name="known-items" type="array">
+        <value type="string" value="systray_1899"/>
+        <value type="string" value="systray_1722"/>
+        <value type="string" value="systray_1793"/>
+        <value type="string" value="systray_1806"/>
+        <value type="string" value="systray_1812"/>
+        <value type="string" value="systray_1807"/>
+        <value type="string" value="systray_1871"/>
+        <value type="string" value="systray_1804"/>
+        <value type="string" value="systray_1798"/>
+        <value type="string" value="systray_1839"/>
+        <value type="string" value="obs"/>
+        <value type="string" value="systray_1698"/>
+        <value type="string" value="systray_1702"/>
+        <value type="string" value="vlc"/>
+        <value type="string" value="systray_1699"/>
+        <value type="string" value="systray_1723"/>
+        <value type="string" value="systray_1728"/>
+        <value type="string" value="systray_1888"/>
+        <value type="string" value="systray_1720"/>
+        <value type="string" value="cortile"/>
+        <value type="string" value="steam"/>
+        <value type="string" value="chrome_status_icon_1"/>
+      </property>
+      <property name="hidden-legacy-items" type="array">
+        <value type="string" value="xfce4-power-manager"/>
+        <value type="string" value="clipman"/>
+        <value type="string" value="discord"/>
+        <value type="string" value="ibus-ui-gtk3"/>
+        <value type="string" value="ibus パネル"/>
+        <value type="string" value="ibus panel"/>
+      </property>
+      <property name="hidden-items" type="array">
+        <value type="string" value="chrome_status_icon_1"/>
+        <value type="string" value="steam"/>
+        <value type="string" value="obs"/>
+      </property>
+    </property>
+    <property name="plugin-10" type="string" value="notification-plugin"/>
+    <property name="plugin-12" type="string" value="clock">
+      <property name="digital-layout" type="uint" value="3"/>
+      <property name="digital-date-font" type="string" value="Px437 DOS/V re. JPN12 10"/>
+      <property name="digital-time-font" type="string" value="Px437 DOS/V re. JPN12 10"/>
+      <property name="mode" type="uint" value="2"/>
+      <property name="digital-time-format" type="string" value="%l:%M:%S %b%d"/>
+    </property>
+    <property name="plugin-7" type="string" value="appmenu">
+      <property name="plugins" type="empty">
+        <property name="plugin-7" type="empty">
+          <property name="compact-mode" type="bool" value="false"/>
+          <property name="bold-application-name" type="bool" value="false"/>
+          <property name="expand" type="bool" value="true"/>
+        </property>
+      </property>
+    </property>
+    <property name="plugin-3" type="string" value="whiskermenu">
+      <property name="launcher-icon-size" type="int" value="1"/>
+      <property name="category-icon-size" type="int" value="-1"/>
+      <property name="launcher-show-description" type="bool" value="false"/>
+      <property name="show-button-icon" type="bool" value="false"/>
+      <property name="show-button-title" type="bool" value="true"/>
+      <property name="button-title" type="string" value="start "/>
+      <property name="position-categories-horizontal" type="bool" value="true"/>
+      <property name="position-categories-alternate" type="bool" value="true"/>
+      <property name="position-profile-alternate" type="bool" value="false"/>
+      <property name="position-search-alternate" type="bool" value="true"/>
+      <property name="position-commands-alternate" type="bool" value="false"/>
+      <property name="menu-width" type="int" value="200"/>
+      <property name="menu-height" type="int" value="400"/>
+      <property name="launcher-show-tooltip" type="bool" value="true"/>
+      <property name="recent" type="array">
+        <value type="string" value="virt-manager.desktop"/>
+        <value type="string" value="qdirstat.desktop"/>
+        <value type="string" value="anki.desktop"/>
+        <value type="string" value="term.desktop"/>
+        <value type="string" value="org.kde.kolourpaint.desktop"/>
+        <value type="string" value="net.lutris.strinova-1.desktop"/>
+        <value type="string" value="firefox.desktop"/>
+        <value type="string" value="discord.desktop"/>
+        <value type="string" value="net.lutris.Lutris.desktop"/>
+        <value type="string" value="xfce4-taskmanager.desktop"/>
+      </property>
+      <property name="command-logout" type="string" value="/home/aura/.signout.sh"/>
+      <property name="favorites" type="array">
+        <value type="string" value="xfce4-web-browser.desktop"/>
+        <value type="string" value="xfce4-file-manager.desktop"/>
+        <value type="string" value="xfce4-terminal-emulator.desktop"/>
+        <value type="string" value="discord.desktop"/>
+        <value type="string" value="signal-desktop.desktop"/>
+        <value type="string" value="steam.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-4" type="string" value="whiskermenu">
+      <property name="menu-width" type="int" value="224"/>
+      <property name="menu-height" type="int" value="375"/>
+      <property name="view-mode" type="int" value="1"/>
+      <property name="launcher-show-description" type="bool" value="false"/>
+      <property name="position-categories-horizontal" type="bool" value="true"/>
+      <property name="position-categories-alternate" type="bool" value="true"/>
+      <property name="position-profile-alternate" type="bool" value="false"/>
+      <property name="position-search-alternate" type="bool" value="true"/>
+      <property name="category-icon-size" type="int" value="-1"/>
+      <property name="launcher-icon-size" type="int" value="1"/>
+      <property name="profile-shape" type="int" value="1"/>
+      <property name="show-button-icon" type="bool" value="false"/>
+      <property name="show-button-title" type="bool" value="true"/>
+      <property name="button-title" type="string" value="start"/>
+      <property name="recent" type="array">
+        <value type="string" value="anki.desktop"/>
+        <value type="string" value="com.obsproject.Studio.desktop"/>
+        <value type="string" value="signal-desktop.desktop"/>
+        <value type="string" value="discord.desktop"/>
+      </property>
+      <property name="favorites" type="array">
+        <value type="string" value="xfce4-web-browser.desktop"/>
+        <value type="string" value="xfce4-mail-reader.desktop"/>
+        <value type="string" value="xfce4-file-manager.desktop"/>
+        <value type="string" value="xfce4-terminal-emulator.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-13" type="string" value="tasklist">
+      <property name="show-labels" type="bool" value="false"/>
+      <property name="show-handle" type="bool" value="false"/>
+      <property name="show-tooltips" type="bool" value="true"/>
+      <property name="middle-click" type="uint" value="1"/>
+    </property>
+    <property name="plugin-15" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+      <property name="expand" type="bool" value="true"/>
+    </property>
+    <property name="plugin-1" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="known-players" type="string" value="audacious;firefox;vlc"/>
+    </property>
+    <property name="plugin-9" type="string" value="genmon"/>
+    <property name="plugin-11" type="string" value="genmon"/>
+    <property name="plugin-17" type="string" value="genmon"/>
+    <property name="plugin-18" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="known-players" type="string" value="audacious;firefox;vlc"/>
+    </property>
+    <property name="plugin-20" type="string" value="clock">
+      <property name="digital-layout" type="uint" value="3"/>
+      <property name="tooltip-format" type="string" value=""/>
+      <property name="digital-time-font" type="string" value="Px437 DOS/V re. JPN12 10"/>
+      <property name="mode" type="uint" value="2"/>
+      <property name="fuzziness" type="uint" value="0"/>
+      <property name="digital-time-format" type="string" value="%l:%M:%S %b%d"/>
+    </property>
+    <property name="plugin-21" type="string" value="genmon"/>
+    <property name="plugin-16" type="string" value="separator">
+      <property name="style" type="uint" value="3"/>
+      <property name="expand" type="bool" value="false"/>
+    </property>
+    <property name="plugin-19" type="string" value="genmon"/>
+    <property name="plugin-8" type="string" value="appmenu">
+      <property name="plugins" type="empty">
+        <property name="plugin-8" type="empty">
+          <property name="expand" type="bool" value="true"/>
+        </property>
+      </property>
+    </property>
+  </property>
+</channel>

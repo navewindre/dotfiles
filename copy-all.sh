@@ -7,8 +7,8 @@ if [ "$answer" != "y" ]; then
     exit 1
 fi
 
-cp -r ./config/* ~/.config/
-cp -r ./icons/* ~/.icons/
-cp -r ./themes/* ~/.themes/
+cp -rf ./config/* ~/.config/
+cp -rf ./icons/* ~/.icons/
+cp -rf ./themes/* ~/.themes/
 cp ./vimrc ~/.vimrc
 cp ./zshrc ~/.zshrc
