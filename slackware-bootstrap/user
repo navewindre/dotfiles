@@ -1,0 +1,13 @@
+#!/bin/bash
+
+user="user"
+if [[ $1 != '' ]]; then
+  user=$1
+fi
+
+useradd $user
+echo "created user $user"
+passwd $user
+
+usermod -a -G wheel $user
+echo "added user $user to wheel group"

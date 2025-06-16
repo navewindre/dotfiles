@@ -1,0 +1,8 @@
+#!/bin/sh
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "setting up /etc/sudoers ..."
+cp -f $basedir/sudoers /etc/sudoers
+chown root:root /etc/sudoers
+chmod 440 /etc/sudoers
+echo "done"

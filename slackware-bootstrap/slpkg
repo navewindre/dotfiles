@@ -1,0 +1,17 @@
+#!/bin/bash
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+oldpwd=$(pwd)
+cd $basedir
+
+wget https://gitlab.com/dslackw/slpkg/-/archive/5.2.5/slpkg-5.2.5.tar.gz
+tar -xvf slpkg-5.2.5.tar.gz
+cd slpkg-5.2.5
+./install.sh
+
+cp -f $basedir/repositories.toml /etc/slpkg/repositories.toml
+cp -f $basedir/slpkg.toml /etc/slpkg/slpkg.toml
+
+slpkg -U
+
+cd $oldpwd

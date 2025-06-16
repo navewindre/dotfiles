@@ -1,0 +1,30 @@
+#!/bin/sh
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+printf "\x1b[1;31m======================= [ \x1b[7;31m ATTENTION \x1b[0;0m\x1b[1;31m ] ========================\n\x1b[0;0m"
+printf "\x1b[16;32mREAD CAREFULLY:\n\x1b[0;0m"
+echo "this script will open a text editor to edit the mirror list"
+echo "for the package manager."
+echo "please uncomment a mirror from a location near you,"
+echo "by removing the '#' from the beginning of the line."
+printf "\x1b[16;32mONLY CHOOSE ONE MIRROR !\n\x1b[0;0m"
+echo "you can save the file by pressing ctrl+x."
+
+printf "\x1b[1;31m================================================================\n\x1b[0;0m"
+
+read -p "press enter to continue"
+nano /etc/slackpkg/mirrors
+
+echo "running slackpkg update ..."
+slackpkg update
+
+echo "============== [ system update ] ==============="
+echo "simply press OK on the package selection screen"
+echo "================================================"
+
+read -p "press enter to continue"
+echo "running full system update ..."
+slackpkg upgrade-all
+cp $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
+slackpkg update
+slackpkg install-new

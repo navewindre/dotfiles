@@ -1,0 +1,17 @@
+#!/bin/bash
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+username="user"
+
+while getopts u:a:f: flag
+do
+    case "${flag}" in
+        u) username=${OPTARG};;
+    esac
+done
+
+echo "working dir: $basedir"
+
+sh $basedir/user
+sh $basedir/sudo
+sh $basedir/slackpkg
+sh $basedir/slpkg
