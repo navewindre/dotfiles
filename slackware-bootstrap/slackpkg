@@ -49,6 +49,7 @@ nano /etc/slackpkg/mirrors
 cp $basedir/slackpkg-blacklist-allowkern /etc/slackpkg/blacklist
 echo "running full system update ..."
 slackpkg update
+slackpkg update gpg
 slackpkg upgrade slackpkg
 slackpkg install-new
 slackpkg upgrade-all
