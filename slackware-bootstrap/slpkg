@@ -4,6 +4,21 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 oldpwd=$(pwd)
 cd $basedir
 
+sh ./deps/python3-flit_core/python3-flit_core.SlackBuild
+upgradepkg --install-new /tmp/python3-flit_core-*
+sh ./deps/python3-installer/python3-installer.SlackBuild
+upgradepkg --install-new /tmp/python3-installer-*
+sh ./deps/python3-pyproject-hooks/python3-pyproject-hooks.SlackBuild
+upgradepkg --install-new /tmp/python3-pyproject-hooks-*
+sh ./deps/python3-build/python3-build.SlackBuild
+upgradepkg --install-new /tmp/python3-build-*
+sh ./deps/python3-poetry-core/python3-poetry-core.SlackBuild
+upgradepkg --install-new /tmp/python3-poetry-core-*
+sh ./deps/python3-tomlkit/python3-tomlkit.SlackBuild
+upgradepkg --install-new /tmp/python3-tomlkit-*
+sh ./deps/python3-pythondialog/python3-pythondialog.SlackBuild
+upgradepkg --install-new /tmp/python3-pythondialog-*
+
 wget https://gitlab.com/dslackw/slpkg/-/archive/5.2.5/slpkg-5.2.5.tar.gz
 tar -xvf slpkg-5.2.5.tar.gz
 cd slpkg-5.2.5

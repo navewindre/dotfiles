@@ -27,23 +27,45 @@ read -p "press enter to continue"
 echo "running full system update ..."
 slackpkg upgrade-all
 cp $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
-slackpkg update
 slackpkg install-new
 
-
 echo "================= [ system branch ] ==============="
-echo "if you would like, you can now exit the mirrors"
-echo "and switch to -current. if not, simply press ctrl+x"
+echo "if you would like, you can now edit the mirrors"
+echo "and switch to -current."
 echo "==================================================="
 
-read -p "press enter to continue"
-nano /etc/slackpkg/mirrors
-slackpkg update
-
-echo "would you like to perform a system update now?"
-read -p "enter your choice [y/n]: " choice
+echo "would you like to edit mirrors and perform a system update now?"
+read -p "enter your choice [y/n] (n): " choice
 if [[ $choice == 'y' ]]; then
+  nano /etc/slackpkg/mirrors
   echo "running full system update ..."
+  echo "y" | slackpkg update
   slackpkg upgrade-all
   slackpkg install-new
+fi
+
+echo "================= [ kde purge ] =================="
+echo "due to how install-new works, kde is always"
+echo "installed during the first system update."
+echo "if you would like, you can now purge the install."
+echo "=================================================="
+
+echo "would you like to purge all kde packages now?"
+read -p "enter your choice [y/n] (n): " choice
+if [[ $choice == 'y' ]]; then
+  echo "purging kde packages ..."
+  slackpkg remove kde
+fi
+
+echo "================== [ TeX packages ] ==============="
+echo "similarly to kde, tex packages are always installed"
+echo "during the first system update. if you would like,"
+echo "you can now purge the install."
+echo "=================================================="
+
+echo "would you like to purge all tex packages now?"
+read -p "enter your choice [y/n] (y): " choice
+if [[ $choice == 'y' ]]; then
+  echo "purging tex packages ..."
+  slackpkg remove texlive
 fi
