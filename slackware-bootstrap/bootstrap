@@ -13,7 +13,7 @@ done
 
 echo "working dir: $basedir"
 
-sh $basedir/user
+sh $basedir/user $username
 sh $basedir/sudo
 sh $basedir/slackpkg
 sh $basedir/slpkg
