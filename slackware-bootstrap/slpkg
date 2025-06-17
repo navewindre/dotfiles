@@ -27,6 +27,6 @@ cd slpkg-5.2.5
 cp -f $basedir/repositories.toml /etc/slpkg/repositories.toml
 cp -f $basedir/slpkg.toml /etc/slpkg/slpkg.toml
 
-slpkg -U
+slpkg -u
 
 cd $oldpwd

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+oldpwd=$(pwd)
+
+mkdir /tmp/multilib
+cd /tmp/multilib
+
+iscurrent=0
+currentstr=$(cat /etc/*-release | grep "VERSION_CODENAME=current")
+if [[ $currentstr != "" ]]; then
+  iscurrent=1
+fi
+
+if [[ $iscurrent == 1 ]]; then
+  slpkg --repository="multilib" -i compat32-tools
+fi
+
+if [[ $iscurrent == 0 ]]; then
+  lftp -c "open http://www.slackware.com/~alien/multilib/ ; mirror -c -e 15.0"
+  cd 15.0
+  upgradepkg --reinstall --install-new *.t?z
+  upgradepkg --install-new slackware64-compat32/*-compat32/*.t?z
+fi
+
+cd $oldpwd

@@ -1,6 +1,8 @@
 #!/bin/sh
 basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+cp /etc/slackpkg/mirrors $basedir/.mirrors-old
+
 printf "\x1b[1;31m======================= [ \x1b[7;31m ATTENTION \x1b[0;0m\x1b[1;31m ] ========================\n\x1b[0;0m"
 printf "\x1b[16;32mREAD CAREFULLY:\n\x1b[0;0m"
 echo "this script will open a text editor to edit the mirror list"
@@ -25,24 +27,31 @@ echo "================================================"
 
 read -p "press enter to continue"
 echo "running full system update ..."
+slackpkg upgrade slackpkg
 slackpkg upgrade-all
-cp $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
 slackpkg install-new
 
-echo "================= [ system branch ] ==============="
-echo "if you would like, you can now edit the mirrors"
-echo "and switch to -current."
-echo "==================================================="
+cp $basedir/mirrors /etc/slackpkg/mirrors
 
-echo "would you like to edit mirrors and perform a system update now?"
-read -p "enter your choice [y/n] (n): " choice
-if [[ $choice == 'y' ]]; then
-  nano /etc/slackpkg/mirrors
-  echo "running full system update ..."
-  echo "y" | slackpkg update
-  slackpkg upgrade-all
-  slackpkg install-new
-fi
+printf "\x1b[1;31m======================= [ \x1b[7;31m ATTENTION \x1b[0;0m\x1b[1;31m ] ========================\n\x1b[0;0m"
+printf "\x1b[16;32mREAD CAREFULLY:\n\x1b[0;0m"
+echo "you will now have to switch the branch to -current"
+echo "same as before, you will have to manually"
+echo "edit the mirror list."
+echo "scroll down below the 15.0 section"
+echo "and select a suitable -current mirror"
+printf "\x1b[1;31m================================================================\n\x1b[0;0m"
+
+read -p "press enter to continue"
+nano /etc/slackpkg/mirrors
+
+cp $basedir/slackpkg-blacklist-allowkern /etc/slackpkg/blacklist
+echo "running full system update ..."
+slackpkg update
+slackpkg upgrade slackpkg
+slackpkg upgrade-all
+slackpkg install-new
+cp $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
 
 echo "================= [ kde purge ] =================="
 echo "due to how install-new works, kde is always"
