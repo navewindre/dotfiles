@@ -51,20 +51,26 @@ echo "running full system update ..."
 slackpkg update
 slackpkg update gpg
 slackpkg upgrade slackpkg
+slackpkg update gpg
+slackpkg upgrade gnupg gnupg2
+slackpkg update gpg
 slackpkg install-new
+slackpkg upgrade-all
+slackpkg update gpg
 slackpkg upgrade-all
 cp $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
 
-kernel=$(ls /boot | grep vmlinuz-generic | sort | tail -1 | cut -d '-' -f 2)
+kernel=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1 | cut -d '-' -f 2)
 
-initrdcmd=$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel | tail -1)
+initrdcmd="$(usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel)"
+initrdcmd=$(echo $initrdcmd | tail -1)
 $initrdcmd
 
 rm /boot/vmlinuz
 ln -s /boot/vmlinuz-generic-$kernel /boot/vmlinuz
 
 rm /boot/System.map
-ln -s /boot/System.map-generic-$kernel.x64 /boot/System.map
+ln -s /boot/System.map-generic-$kernel /boot/System.map
 
 rm /boot/config
 ln -s /boot/config-generic-$kernel.x64 /boot/config
