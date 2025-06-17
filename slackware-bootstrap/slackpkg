@@ -59,6 +59,15 @@ kernel=$(ls /boot | grep vmlinuz-generic | sort | tail -1 | cut -d '-' -f 2)
 initrdcmd=$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel | tail -1)
 $initrdcmd
 
+rm /boot/vmlinuz
+ln -s /boot/vmlinuz-generic-$kernel /boot/vmlinuz
+
+rm /boot/System.map
+ln -s /boot/System.map-generic-$kernel.x64 /boot/System.map
+
+rm /boot/config
+ln -s /boot/config-generic-$kernel.x64 /boot/config
+
 echo "================= [ kde purge ] =================="
 echo "due to how install-new works, kde is always"
 echo "installed during the first system update."
