@@ -52,7 +52,8 @@ slackpkg update
 slackpkg update gpg
 slackpkg upgrade slackpkg
 slackpkg update gpg
-slackpkg upgrade gnupg gnupg2
+slackpkg upgrade glibc libgcrypt aaa_glibc-solibs glib2 libffi
+slackpkg upgrade gnupg gnupg2 openssl openssl-solibs openssl11 openssl11-solibs
 slackpkg update gpg
 slackpkg install-new
 slackpkg upgrade-all
