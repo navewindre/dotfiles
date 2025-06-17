@@ -2,6 +2,8 @@
 basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 username="user"
 
+kernelver="6.15.2"
+
 while getopts u:a:f: flag
 do
     case "${flag}" in
@@ -17,10 +19,45 @@ sh $basedir/slackpkg
 sh $basedir/slpkg
 sh $basedir/multilib
 
-echo "============== [ setup done ] ==============="
-echo "username: $username"
-echo "it's recommended to reboot your system."
-echo "upon reboot you can sign in with your new user"
-echo "=============================================="
+echo "============== [ kernel update ] ==============="
+echo "you can choose to update your kernel"
+echo "after system reboot."
+echo "this will update your kernel to $kernelver"
+echo "================================================"
 
-read -p "press enter to return to shell"
+nreboot=0
+
+read -p "do you want to update your kernel [y/n]? (y):" choice
+if [[ $choice == "y" ]]; then
+  nreboot=1
+  echo "sh $basedir/kernel" >> /root/.bashrc
+fi
+
+echo "================= [ nvidia driver ] ================="
+echo "you can choose to install the nvidia driver"
+echo "after system reboot."
+echo "this will install the nvidia kernel module and the"
+echo "gpu driver."
+echo "====================================================="
+
+read -p "do you want to install the nvidia driver [y/n]? (y):" choice
+if [[ $choice == "y" ]]; then
+  nreboot=1
+  echo "sh $basedir/nvidia-driver" >> /root/.bashrc
+fi
+
+if [[ $nreboot == 1 ]]; then
+  echo "rm -rf /root/.bashrc" >> /root/.bashrc
+  echo "============================ [ reboot ] ==========================="
+  printf "\x1b[1;31mupon reboot, make sure to log in as ROOT first !!!\x1b[0;0m\n"
+  echo "==================================================================="
+  read -p "press enter to reboot your system"
+  echo "rebooting..."
+  reboot
+else
+  echo "============== [ setup done ] ==============="
+  echo "username: $username"
+  echo "you may now log into your user account."
+  echo "it is recommended to reboot your system now."
+  echo "=============================================="
+fi

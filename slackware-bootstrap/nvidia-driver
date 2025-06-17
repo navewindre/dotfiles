@@ -1,0 +1,25 @@
+#!/bin/sh
+
+pushd
+
+slpkg --repository="sbo" -d nvidia-kernel
+slpkg --repository="sbo" -d nvidia-driver
+
+cd /tmp/slpkg/nvidia-kernel
+
+kernelver=$(ls /boot | grep "vmlinuz-generic" | sort | tail -1)
+chmod +x ./nvidia-kernel.SlackBuild
+KERNEL=$kernelver ./nvidia-kernel.SlackBuild
+
+cd /tmp/slpkg/nvidia-driver
+chmod +x ./nvidia-driver.SlackBuild
+COMPAT32="yes" ./nvidia-driver.SlackBuild
+
+upgradepkg --install-new /tmp/nvidia-kernel*
+upgradepkg --install-new /tmp/nvidia-driver*
+
+touch /etc/modprobe.d/BLACKLIST-nouveau.conf
+echo "blacklist nouveau" >> /etc/modprobe.d/BLACKLIST-nouveau.conf
+echo "/usr/bin/nvidia-modprobe -c 0 -u" >> /etc/rc.d/rc.local
+
+popd

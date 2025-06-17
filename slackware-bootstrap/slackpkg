@@ -20,6 +20,7 @@ nano /etc/slackpkg/mirrors
 
 echo "running slackpkg update ..."
 slackpkg update
+slackpkg update gpg
 
 echo "============== [ system update ] ==============="
 echo "simply press OK on the package selection screen"
@@ -49,9 +50,14 @@ cp $basedir/slackpkg-blacklist-allowkern /etc/slackpkg/blacklist
 echo "running full system update ..."
 slackpkg update
 slackpkg upgrade slackpkg
-slackpkg upgrade-all
 slackpkg install-new
+slackpkg upgrade-all
 cp $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
+
+kernel=$(ls /boot | grep vmlinuz-generic | sort | tail -1 | cut -d '-' -f 2)
+
+initrdcmd=$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel | tail -1)
+$initrdcmd
 
 echo "================= [ kde purge ] =================="
 echo "due to how install-new works, kde is always"

@@ -1,0 +1,40 @@
+#!/bin/bash
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+pushd
+
+mkdir $basedir/linux
+cd $basedir/linux
+wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.2.tar.xz
+unxz linux*
+tar -xvf linux*
+
+cd linux*
+make clean
+make mrproper
+
+zcat /proc/config.gz > .config
+make olddefconfig
+
+make -j12
+make modules_install
+
+cp arch/x86/boot/bzImage /boot/vmlinuz-generic-6.15.2
+
+dirstr=$(ls /boot | grep vmlinuz-6.15.2)
+if [[ $dirstr != '' ]]; then
+  cp System.map /boot/System.map-6.15.2
+  cp .config /boot/config-6.15.2
+
+  rm /boot/vmlinuz
+  ln -s /boot/vmlinuz-generic-6.15.2 /boot/vmlinuz
+
+  rm /boot/System.map
+  ln -s /boot/System.map-6.15.2 /boot/System.map
+
+  rm /boot/config
+  ln -s /boot/config-6.15.2 /boot/config
+fi
+
+popd
+
