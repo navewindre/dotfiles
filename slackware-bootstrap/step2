@@ -34,8 +34,8 @@ if [[ $choice == "y" ]]; then
 fi
 
 if [[ $nreboot == 1 ]]; then
-  echo "sh $basedir/finish" >> /root/.bashrc
-  echo "rm -f /root/.bashrc" >> /root/.bashrc
+  echo "sh $basedir/finish" >> /root/.bash_profile
+  echo "rm -f /root/.bashrc" >> /root/.bash_profile
   echo "============================ [ reboot ] ==========================="
   printf "\x1b[1;31mupon reboot, make sure to log in as ROOT first !!!\x1b[0;0m\n"
   echo "==================================================================="

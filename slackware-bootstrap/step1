@@ -3,7 +3,7 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 sh $basedir/slackpkg
 
-echo "sh $basedir/step2" >> /root/.bashrc
+echo "sh $basedir/step2" >> /root/.bash_profile
 
 echo "=================== [ system reboot ] =================="
 printf "\x1b[1;31mREAD CAREFULLY:\033[0m\n"
