@@ -65,7 +65,7 @@ cp -f $basedir/slackpkg.conf /etc/slackpkg/slackpkg.conf
 
 isgeneric=1
 kernel=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1 | cut -d '-' -f 3)
-if [[ $kernel == "" ]]; then # newer versions of slackware dont differentiate -generic and -huge
+if [[ $kernel == "" ]]; then
   kernel=$(ls /boot | grep "vmlinuz-[0-9]" | sort | tail -1 | cut -d '-' -f 2)
   isgeneric=0
 fi
