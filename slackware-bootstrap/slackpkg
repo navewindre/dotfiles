@@ -32,7 +32,7 @@ slackpkg upgrade slackpkg
 slackpkg upgrade-all
 slackpkg install-new
 
-cp $basedir/mirrors /etc/slackpkg/mirrors
+cp -f $basedir/.mirrors-old /etc/slackpkg/mirrors
 
 printf "\x1b[1;31m======================= [ \x1b[7;31m ATTENTION \x1b[0;0m\x1b[1;31m ] ========================\n\x1b[0;0m"
 printf "\x1b[16;32mREAD CAREFULLY:\n\x1b[0;0m"
