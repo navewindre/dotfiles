@@ -28,7 +28,18 @@ if [[ $dirstr != '' ]]; then
   cp System.map /boot/System.map-6.15.2.x64
   cp .config /boot/config-6.15.2
 
-  liloconfig
+  echo "==================== [ kernel update ] =========================="
+  echo "your kernel has been updated by slackpkg. in order to boot,"
+  echo "you will need to update your bootloader config."
+  echo "if you do not use LILO, or do not boot off of your slackware disk"
+  echo "simply input 'n'"
+  echo "================================================================="
+
+  read -p "would you like to update your bootloader? [y/n] (y): " choice
+  if [[ $choice != 'n' ]]; then
+    liloconfig
+  fi
+
 
   rm /boot/vmlinuz
   ln -s /boot/vmlinuz-generic-6.15.2 /boot/vmlinuz
