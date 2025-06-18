@@ -63,9 +63,11 @@ slackpkg upgrade-all
 cp -f $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
 cp -f $basedir/slackpkg.conf /etc/slackpkg/slackpkg.conf
 
+isgeneric=1
 kernel=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1 | cut -d '-' -f 3)
 if [[ $kernel == "" ]]; then # newer versions of slackware dont differentiate -generic and -huge
   kernel=$(ls /boot | grep "vmlinuz-[0-9]" | sort | tail -1 | cut -d '-' -f 2)
+  isgeneric=0
 fi
 
 initrdcmd="$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel)"
@@ -85,13 +87,25 @@ if [[ $choice != 'n' ]]; then
 fi
 
 rm /boot/vmlinuz
-ln -s /boot/vmlinuz-generic-$kernel /boot/vmlinuz
+if [[ $isgeneric == 1 ]]; then
+  ln -s /boot/vmlinuz-generic-$kernel /boot/vmlinuz
+else
+  ln -s /boot/vmlinuz-$kernel /boot/vmlinuz
+fi
 
 rm /boot/System.map
-ln -s /boot/System.map-generic-$kernel /boot/System.map
+if [[ $isgeneric == 1 ]]; then
+  ln -s /boot/System.map-generic-$kernel /boot/System.map
+else
+  ln -s /boot/System.map-$kernel /boot/System.map
+fi
 
 rm /boot/config
-ln -s /boot/config-generic-$kernel.x64 /boot/config
+if [[ $isgeneric == 1 ]]; then
+  ln -s /boot/config-generic-$kernel.x64 /boot/config
+else
+  ln -s /boot/config-$kernel.x64 /boot/config
+fi
 
 echo "================= [ kde purge ] =================="
 echo "due to how install-new works, kde is always"

@@ -21,12 +21,12 @@ make modules_install
 
 cp arch/x86/boot/bzImage /boot/vmlinuz-generic-6.15.2
 
-dirstr=$(ls /boot | grep vmlinuz-6.15.2)
+dirstr=$(ls /boot | grep vmlinuz-generic-6.15.2)
 if [[ $dirstr != '' ]]; then
   initrdcmd=$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k 6.15.2 | tail -1)
   $initrdcmd
-  cp System.map /boot/System.map-6.15.2.x64
-  cp .config /boot/config-6.15.2
+  cp System.map /boot/System.map-6.15.2
+  cp .config /boot/config-6.15.2.x64
 
   echo "==================== [ kernel update ] =========================="
   echo "your kernel has been updated. in order to boot, you will need"
@@ -40,12 +40,11 @@ if [[ $dirstr != '' ]]; then
     liloconfig
   fi
 
-
   rm /boot/vmlinuz
   ln -s /boot/vmlinuz-generic-6.15.2 /boot/vmlinuz
 
   rm /boot/System.map
-  ln -s /boot/System.map-6.15.2.x64 /boot/System.map
+  ln -s /boot/System.map-6.15.2 /boot/System.map
 
   rm /boot/config
   ln -s /boot/config-6.15.2.x64 /boot/config
