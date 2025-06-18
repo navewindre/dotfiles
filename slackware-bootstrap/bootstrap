@@ -3,13 +3,23 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 username="user"
 
 kernelver="6.15.2"
+hasuser=0
 
 while getopts u:a:f: flag
 do
     case "${flag}" in
-        u) username=${OPTARG};;
+        u) username=${OPTARG}
+          hasuser=1
+          ;;
     esac
 done
+
+if [[ $hasuser == 0 ]]; then
+  read -p "WARNING: username not provided. continue? [y/n] (n):" choice
+  if [[ $choice != "y" ]]; then
+    exit 1
+  fi
+fi
 
 echo "working dir: $basedir"
 
