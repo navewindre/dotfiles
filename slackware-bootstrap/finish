@@ -1,0 +1,15 @@
+#!/bin/bash
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+sh $basedir/runlevel
+
+echo "================= [ setup complete ] ===================="
+echo "the system will now reboot"
+echo "upon reboot, you can sign in with your chosen username"
+echo "if you didn't choose to set up graphical login,"
+echo "you can start the desktop by typing 'startx'"
+echo "or 'init 4' after login as root"
+echo "========================================================="
+
+read -p "press enter to reboot"
+reboot

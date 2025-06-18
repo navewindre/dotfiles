@@ -1,0 +1,16 @@
+#!/bin/bash
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "=================[ runlevel choice ] ===================="
+echo "this means that you only get this console and no graphics"
+echo "if you would like to change the runlevel to 4, enabling"
+echo "graphical login, you can do that now."
+echo "========================================================="
+
+read -p "would you like to change runlevel to 4 [y/n]? (n) " choice
+if [[ $choice == 'y' ]]; then
+  cp -f $basedir/inittab /etc/inittab
+else
+  echo "you can start the graphical login as root using 'init 4'"
+  echo "or a desktop session as a normal user with 'startx'"
+fi

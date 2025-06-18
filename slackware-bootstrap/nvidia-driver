@@ -7,7 +7,11 @@ slpkg --repository="sbo" -d nvidia-driver
 
 cd /tmp/slpkg/nvidia-kernel
 
-kernelver=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1)
+kernelver=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1 | cut -d '-' -f 3)
+if [[ $kernel == "" ]]; then
+  kernel=$(ls /boot | grep "vmlinuz-[0-9]" | sort | tail -1 | cut -d '-' -f 2)
+fi
+
 chmod +x ./nvidia-kernel.SlackBuild
 KERNEL=$kernelver ./nvidia-kernel.SlackBuild
 

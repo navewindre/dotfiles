@@ -46,7 +46,7 @@ printf "\x1b[1;31m==============================================================
 read -p "press enter to continue"
 nano /etc/slackpkg/mirrors
 
-cp $basedir/slackpkg-blacklist-allowkern /etc/slackpkg/blacklist
+cp -f $basedir/slackpkg-blacklist-allowkern /etc/slackpkg/blacklist
 echo "running full system update ..."
 slackpkg update
 slackpkg update gpg
@@ -55,15 +55,20 @@ slackpkg update gpg
 slackpkg upgrade glibc libgcrypt aaa_glibc-solibs glib2 libffi
 slackpkg upgrade gnupg gnupg2 openssl openssl-solibs openssl11 openssl11-solibs
 slackpkg update gpg
+cp -f $basedir/slackpkg-nogpg.conf /etc/slackpkg/slackpkg.conf
 slackpkg install-new
 slackpkg upgrade-all
 slackpkg update gpg
 slackpkg upgrade-all
-cp $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
+cp -f $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
+cp -f $basedir/slackpkg.conf /etc/slackpkg/slackpkg.conf
 
-kernel=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1 | cut -d '-' -f 2)
+kernel=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1 | cut -d '-' -f 3)
+if [[ $kernel == "" ]]; then # newer versions of slackware dont differentiate -generic and -huge
+  kernel=$(ls /boot | grep "vmlinuz-[0-9]" | sort | tail -1 | cut -d '-' -f 2)
+fi
 
-initrdcmd="$(usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel)"
+initrdcmd="$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel)"
 initrdcmd=$(echo $initrdcmd | tail -1)
 $initrdcmd
 
