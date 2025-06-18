@@ -30,7 +30,7 @@ if [[ $dirstr != '' ]]; then
 
   echo "==================== [ kernel update ] =========================="
   echo "your kernel has been updated. in order to boot, you will need"
-  echo "you will need to update your bootloader config."
+  echo "to update your bootloader config."
   echo "if you do not use LILO, or do not boot off of your slackware disk"
   echo "simply input 'n'"
   echo "================================================================="

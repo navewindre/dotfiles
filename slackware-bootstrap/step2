@@ -3,6 +3,8 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 kernelver="6.15.2"
 
+rm /root/.bash_profile
+
 sh $basedir/slpkg
 sh $basedir/multilib
 
