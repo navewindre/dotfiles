@@ -1,7 +1,7 @@
 #!/bin/bash
 basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-pushd
+pushd $PWD
 
 mkdir $basedir/linux
 cd $basedir/linux
@@ -9,7 +9,7 @@ wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.2.tar.xz
 unxz linux*
 tar -xvf linux*
 
-cd linux*
+cd linux-6.15.2
 make clean
 make mrproper
 

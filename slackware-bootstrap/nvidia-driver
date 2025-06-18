@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pushd
+pushd $PWD
 
 slpkg --repository="sbo" -d nvidia-kernel
 slpkg --repository="sbo" -d nvidia-driver
