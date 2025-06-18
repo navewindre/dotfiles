@@ -72,6 +72,18 @@ initrdcmd="$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel)"
 initrdcmd=$(echo $initrdcmd | tail -1)
 $initrdcmd
 
+echo "==================== [ kernel update ] =========================="
+echo "your kernel has been updated by slackpkg. in order to boot,"
+echo "you will need to update your bootloader config."
+echo "if you do not use LILO, or do not boot off of your slackware disk"
+echo "simply input 'n'"
+echo "================================================================="
+
+read -p "would you like to update your bootloader? [y/n] (y): " choice
+if [[ $choice != 'n' ]]; then
+  liloconfig
+fi
+
 rm /boot/vmlinuz
 ln -s /boot/vmlinuz-generic-$kernel /boot/vmlinuz
 
