@@ -29,7 +29,7 @@ if [[ $dirstr != '' ]]; then
   cp .config /boot/config-6.15.2
 
   echo "==================== [ kernel update ] =========================="
-  echo "your kernel has been updated by slackpkg. in order to boot,"
+  echo "your kernel has been updated. in order to boot, you will need"
   echo "you will need to update your bootloader config."
   echo "if you do not use LILO, or do not boot off of your slackware disk"
   echo "simply input 'n'"

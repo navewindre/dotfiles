@@ -1,0 +1,15 @@
+#!/bin/bash
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+sh $basedir/slackpkg
+
+echo "sh $basedir/step2" >> /root/.bashrc
+
+echo "=================== [ system reboot ] =================="
+printf "\x1b[1;31mREAD CAREFULLY:\033[0m\n"
+echo "your system will now reboot, after reboot make sure to"
+printf "SIGN IN \x1b[1;31mAS ROOT\x1b[0m !!!\n"
+echo "========================================================"
+read -p "press enter to reboot"
+reboot
+
