@@ -1,0 +1,38 @@
+#!/bin/sh
+
+gxmessage -center "help:
+================================================================
+window controls:
+win+w/a/s/d - move window left/right/top/bottom
+win+q/e/z/c - move window to corner
+win+shift+w/a/s/d/q/e/z/c - move to window in direction
+
+win+shift+r - resize window
+win+shift+x - move window
+win+ctrl+q - close window
+
+alt+left click - move window
+alt+right click - move/resize window
+
+win+x - maximize window
+win+ctrl+t - tile windows
+win+ctrl+r - untile windows
+win+1 - toggle tile mode
+win+2/3 - resize tile master/slave
+
+win+1 - make current window tiled master
+win+2/3 - resize tile master/slave
+
+win+shift+1 - toggle tile mode
+win+ctrl+2/3 - change tiled master window count
+win+shift+2/3 - change tiled slave window count
+win+alt+w/s - move tiled window to prev/next position
+win+alt+a/d - move tiled window to prev/next screen
+
+launchers:
+win - xfce4-popup-whiskermenu
+win+r - xfce4-appfinder
+win+t - xfce4-terminal
+win+ctrl+s - screenshot (scrot + xclip)
+win+ctrl+e - ocr
+"
