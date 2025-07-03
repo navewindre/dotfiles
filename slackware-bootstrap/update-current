@@ -33,6 +33,8 @@ slackpkg -batch=on -default_answer=y upgrade-all
 cp -f $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
 cp -f $basedir/slackpkg.conf /etc/slackpkg/slackpkg.conf
 
+slackpkg new-config
+
 isgeneric=1
 kernel=$(ls /boot | grep "vmlinuz-generic-" | sort | tail -1 | cut -d '-' -f 3)
 if [[ $kernel == "" ]]; then

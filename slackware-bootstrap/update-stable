@@ -35,5 +35,7 @@ echo "==== [ updating system... ] ===="
 slackpkg -batch=on -default_answer=y upgrade-all
 slackpkg -batch=on -default_answer=y install-new
 
+slackpkg new-config
+
 cp -f $basedir/.mirrors-old /etc/slackpkg/mirrors
 touch ~/.stable-done
