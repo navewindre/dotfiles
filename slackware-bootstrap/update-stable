@@ -19,11 +19,12 @@ read -p "press enter to continue"
 nano /etc/slackpkg/mirrors
 
 echo "running slackpkg update ..."
-slackpkg update
-slackpkg update gpg
+slackpkg -batch=on update
+slackpkg -batch=on update gpg
 
 echo "updating slackpkg..."
-slackpkg -postinst=off upgrade slackpkg
+slackpkg -batch=on -postinst=off upgrade slackpkg
+rm /etc/slackpkg/mirrors.new
 
 echo "============== [ system update ] ==============="
 echo "simply press OK on the package selection screen"
@@ -31,8 +32,8 @@ echo "================================================"
 read -p "press enter to continue"
 
 echo "==== [ updating system... ] ===="
-slackpkg upgrade-all
-slackpkg install-new
+slackpkg -batch=on -default_answer=y upgrade-all
+slackpkg -batch=on -default_answer=y install-new
 
 cp -f $basedir/.mirrors-old /etc/slackpkg/mirrors
 touch ~/.stable-done

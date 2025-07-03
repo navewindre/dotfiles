@@ -15,20 +15,21 @@ nano /etc/slackpkg/mirrors
 
 cp -f $basedir/slackpkg-blacklist-allowkern /etc/slackpkg/blacklist
 echo "running full system update ..."
-slackpkg update
-slackpkg update gpg
+slackpkg -batch=on update
+slackpkg -batch=on update gpg
 echo "updating slackpkg..."
-slackpkg -postinst=off upgrade slackpkg
+slackpkg -batch=on -default_answer=y -postinst=off upgrade slackpkg
+rm /etc/slackpkg/mirrors.new
 echo "==== [ updating system... ] ===="
-slackpkg update gpg
-slackpkg upgrade glibc libgcrypt aaa_glibc-solibs glib2 libffi
-slackpkg upgrade gnupg gnupg2 openssl openssl-solibs openssl11 openssl11-solibs
-slackpkg update gpg
+slackpkg -batch=on -default_answer=y update gpg
+slackpkg -batch=on -default_answer=y upgrade glibc libgcrypt aaa_glibc-solibs glib2 libffi
+slackpkg -batch=on -default_answer=y upgrade gnupg gnupg2 openssl openssl-solibs openssl11 openssl11-solibs
+slackpkg -batch=on -default_answer=y update gpg
 cp -f $basedir/slackpkg-nogpg.conf /etc/slackpkg/slackpkg.conf
-slackpkg install-new
-slackpkg upgrade-all
-slackpkg update gpg
-slackpkg upgrade-all
+slackpkg -batch=on -default_answer=y install-new
+slackpkg -batch=on -default_answer=y upgrade-all
+slackpkg -batch=on -default_answer=y update gpg
+slackpkg -batch=on -default_answer=y upgrade-all
 cp -f $basedir/slackpkg-blacklist /etc/slackpkg/blacklist
 cp -f $basedir/slackpkg.conf /etc/slackpkg/slackpkg.conf
 
