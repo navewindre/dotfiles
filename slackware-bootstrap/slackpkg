@@ -27,8 +27,11 @@ echo "simply press OK on the package selection screen"
 echo "================================================"
 
 read -p "press enter to continue"
-echo "running full system update ..."
+printf "\x1b[1;31m======================= [ \x1b[7;31m ATTENTION \x1b[0;0m\x1b[1;31m ] ========================\n\x1b[0;0m"
+echo "updating slackpkg, if prompted to overwrite configuration files"
+echo "pick 'Remove (R)' !!!!"
 slackpkg upgrade slackpkg
+echo "==== [ updating system... ] ===="
 slackpkg upgrade-all
 slackpkg install-new
 
@@ -50,7 +53,11 @@ cp -f $basedir/slackpkg-blacklist-allowkern /etc/slackpkg/blacklist
 echo "running full system update ..."
 slackpkg update
 slackpkg update gpg
+printf "\x1b[1;31m======================= [ \x1b[7;31m ATTENTION \x1b[0;0m\x1b[1;31m ] ========================\n\x1b[0;0m"
+echo "updating slackpkg, if prompted to overwrite configuration files"
+echo "pick 'Remove (R)' !!!!"
 slackpkg upgrade slackpkg
+echo "==== [ updating system... ] ===="
 slackpkg update gpg
 slackpkg upgrade glibc libgcrypt aaa_glibc-solibs glib2 libffi
 slackpkg upgrade gnupg gnupg2 openssl openssl-solibs openssl11 openssl11-solibs

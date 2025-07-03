@@ -347,15 +347,11 @@ let g:lightline = {
     \ }
 \ }
 
-" Relative Line Numbers in Sign Column (0-9 only, 0 for current line)
-" Place this in ~/.vim/plugin/relative_sign_numbers.vim
-
 if exists('g:loaded_relative_sign_numbers')
     finish
 endif
 let g:loaded_relative_sign_numbers = 1
 
-" Save signs state
 let s:signs = {}
 
 function! s:UpdateSignColumn()
@@ -725,6 +721,14 @@ hi def link @punctuation.special.javascript Delimiter
 hi def link @lsp.type.keywordLiteral.zig Special
 hi def link @lsp.type.string.zig NONE
 hi def link @type.builtin.arduino Keyword
+hi def link markdownId markdownIdDeclaration
+hi def link markdownH1 RenderMarkdownH1
+hi def link markdownH2 RenderMarkdownH2
+hi def link markdownHeadingRule RenderMarkdownTableHead
+hi def link markdownRule markdownH1
+hi def link markdownIdDeclaration markdownCode
+hi def link markdownLineStart markdownCode
+
 hi @type.builtin.cpp guifg=#ea5ce2
 hi SpecialChar ctermfg=9 guifg=#e4600e
 hi SignColumn guibg=#000000
