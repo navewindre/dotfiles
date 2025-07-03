@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm ~/.user-done
 rm ~/.step1-done
 rm ~/.stable-done
 rm ~/.current-done

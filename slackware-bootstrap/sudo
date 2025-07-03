@@ -6,3 +6,5 @@ cp -f $basedir/sudoers /etc/sudoers
 chown root:root /etc/sudoers
 chmod 440 /etc/sudoers
 echo "done"
+
+touch ~/.sudo-done
