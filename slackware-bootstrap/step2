@@ -4,7 +4,7 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 kernelver="6.15.2"
 
 if [[ -f "~/.step2-done" ]]; then
-  sh $basedir/step2-done
+  sh $basedir/step2-finish
   exit
 fi
 
@@ -54,4 +54,4 @@ if [[ $nreboot == 1 ]]; then
   touch ~/.nreboot
 fi
 
-sh $basedir/step2-done
+sh $basedir/step2-finish
