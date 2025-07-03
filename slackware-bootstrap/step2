@@ -3,6 +3,11 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 kernelver="6.15.2"
 
+if [[ -f "~/.step2-done" ]]; then
+  sh $basedir/step2-done
+  exit
+fi
+
 rm /root/.bash_profile
 
 if [[ ! -f "~/.slpkg-done" ]]; then
@@ -46,21 +51,7 @@ fi
 
 touch ~/.step2-done
 if [[ $nreboot == 1 ]]; then
-  echo "sh $basedir/finish" >> /root/.bash_profile
-  echo "rm -f /root/.bash_profile" >> /root/.bash_profile
-  echo "============================ [ reboot ] ==========================="
-  printf "\x1b[1;31mupon reboot, make sure to log in as ROOT first !!!\x1b[0;0m\n"
-  echo "==================================================================="
-  read -p "press enter to reboot your system"
-  echo "rebooting..."
-  reboot
-else
-  sh $basedir/runlevel
-  sh $basedir/cleanup
-
-  echo "============== [ setup done ] ==============="
-  echo "username: $username"
-  echo "you may now log into your user account."
-  echo "it is recommended to reboot your system now."
-  echo "=============================================="
+  touch ~/.nreboot
 fi
+
+sh $basedir/step2-done

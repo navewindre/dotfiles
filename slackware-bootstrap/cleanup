@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 rm ~/.step1-done
 rm ~/.stable-done
@@ -9,3 +9,4 @@ rm ~/.multilib-done
 rm ~/.kernel-done
 rm ~/.nvidia-done
 rm ~/.step2-done
+rm ~/.nreboot
