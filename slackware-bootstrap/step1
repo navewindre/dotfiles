@@ -1,9 +1,25 @@
 #!/bin/bash
 basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-sh $basedir/slackpkg
+if [[ -f "~/.step1-done" ]]; then
+  sh $basedir/step2
+  exit
+fi
+
+if [[ ! -f "~/.stable-done" ]]; then
+  sh $basedir/update-stable
+fi
+
+if [[ ! -f "~/.current-done" ]]; then
+  sh $basedir/update-current
+fi
+
+if [[ ! -f "~/.purge-done" ]]; then
+  sh $basedir/package-purge
+fi
 
 echo "sh $basedir/step2" >> /root/.bash_profile
+touch ~/.step1-done
 
 echo "=================== [ system reboot ] =================="
 printf "\x1b[1;31mREAD CAREFULLY:\033[0m\n"

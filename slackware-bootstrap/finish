@@ -2,6 +2,7 @@
 basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 sh $basedir/runlevel
+sh $basedir/cleanup
 
 echo "================= [ setup complete ] ===================="
 echo "the system will now reboot"

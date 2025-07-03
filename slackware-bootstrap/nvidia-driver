@@ -27,3 +27,5 @@ echo "blacklist nouveau" >> /etc/modprobe.d/BLACKLIST-nouveau.conf
 echo "/usr/bin/nvidia-modprobe -c 0 -u" >> /etc/rc.d/rc.local
 
 popd
+
+touch ~/.nvidia-done

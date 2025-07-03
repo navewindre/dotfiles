@@ -5,39 +5,49 @@ kernelver="6.15.2"
 
 rm /root/.bash_profile
 
-sh $basedir/slpkg
-sh $basedir/multilib
-
-echo "============== [ kernel update ] ==============="
-echo "you can choose to update your kernel"
-echo "after system reboot."
-echo "this will update your kernel to $kernelver"
-echo "================================================"
-
-nreboot=0
-
-read -p "do you want to update your kernel [y/n]? (y):" choice
-if [[ $choice == "y" ]]; then
-  nreboot=1
-  sh $basedir/kernel
+if [[ ! -f "~/.slpkg-done" ]]; then
+  sh $basedir/slpkg
 fi
 
-echo "================= [ nvidia driver ] ================="
-echo "you can choose to install the nvidia driver"
-echo "after system reboot."
-echo "this will install the nvidia kernel module and the"
-echo "gpu driver."
-echo "====================================================="
-
-read -p "do you want to install the nvidia driver [y/n]? (y):" choice
-if [[ $choice == "y" ]]; then
-  nreboot=1
-  sh $basedir/nvidia
+if [[ ! -f "~/.multilib-done" ]]; then
+  sh $basedir/multilib
 fi
 
+if [[ ! -f "~/.kernel-done" ]]; then
+  echo "============== [ kernel update ] ==============="
+  echo "you can choose to update your kernel"
+  echo "after system reboot."
+  echo "this will update your kernel to $kernelver"
+  echo "================================================"
+
+  nreboot=0
+
+  read -p "do you want to update your kernel [y/n]? (y):" choice
+  if [[ $choice == "y" ]]; then
+    nreboot=1
+    sh $basedir/kernel
+  fi
+fi
+
+if [[ ! -f "~/.nvidia-done" ]]; then
+  echo "================= [ nvidia driver ] ================="
+  echo "you can choose to install the nvidia driver"
+  echo "after system reboot."
+  echo "this will install the nvidia kernel module and the"
+  echo "gpu driver."
+  echo "====================================================="
+
+  read -p "do you want to install the nvidia driver [y/n]? (y):" choice
+  if [[ $choice == "y" ]]; then
+    nreboot=1
+    sh $basedir/nvidia
+  fi
+fi
+
+touch ~/.step2-done
 if [[ $nreboot == 1 ]]; then
   echo "sh $basedir/finish" >> /root/.bash_profile
-  echo "rm -f /root/.bashrc" >> /root/.bash_profile
+  echo "rm -f /root/.bash_profile" >> /root/.bash_profile
   echo "============================ [ reboot ] ==========================="
   printf "\x1b[1;31mupon reboot, make sure to log in as ROOT first !!!\x1b[0;0m\n"
   echo "==================================================================="
@@ -46,6 +56,7 @@ if [[ $nreboot == 1 ]]; then
   reboot
 else
   sh $basedir/runlevel
+  sh $basedir/cleanup
 
   echo "============== [ setup done ] ==============="
   echo "username: $username"

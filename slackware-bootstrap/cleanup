@@ -1,0 +1,11 @@
+#!/bin/sh
+
+rm ~/.step1-done
+rm ~/.stable-done
+rm ~/.current-done
+rm ~/.purge-done
+rm ~/.slpkg-done
+rm ~/.multilib-done
+rm ~/.kernel-done
+rm ~/.nvidia-done
+rm ~/.step2-done

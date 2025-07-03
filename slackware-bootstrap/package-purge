@@ -1,0 +1,30 @@
+#!/bin/sh
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "================= [ kde purge ] =================="
+echo "due to how install-new works, kde is always"
+echo "installed during the first system update."
+echo "if you would like, you can now purge the install."
+echo "=================================================="
+
+echo "would you like to purge all kde packages now?"
+read -p "enter your choice [y/n] (n): " choice
+if [[ $choice == 'y' ]]; then
+  echo "purging kde packages ..."
+  slackpkg remove kde
+fi
+
+echo "================== [ TeX packages ] ==============="
+echo "similarly to kde, tex packages are always installed"
+echo "during the first system update. if you would like,"
+echo "you can now purge the install."
+echo "=================================================="
+
+echo "would you like to purge all tex packages now?"
+read -p "enter your choice [y/n] (y): " choice
+if [[ $choice == 'y' ]]; then
+  echo "purging tex packages ..."
+  slackpkg remove texlive
+fi
+
+touch ~/.purge-done

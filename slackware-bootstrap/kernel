@@ -52,3 +52,4 @@ fi
 
 popd
 
+touch ~/.kernel-done

@@ -30,3 +30,4 @@ cp -f $basedir/slpkg.toml /etc/slpkg/slpkg.toml
 slpkg -u
 
 cd $oldpwd
+touch ~/.slpkg-done
