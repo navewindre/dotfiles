@@ -11,7 +11,7 @@ echo "would you like to purge all kde packages now?"
 read -p "enter your choice [y/n] (n): " choice
 if [[ $choice == 'y' ]]; then
   echo "purging kde packages ..."
-  slackpkg remove kde
+  slackpkg -batch=on -default_answer=y remove kde
 fi
 
 echo "================== [ TeX packages ] ==============="
@@ -24,7 +24,7 @@ echo "would you like to purge all tex packages now?"
 read -p "enter your choice [y/n] (y): " choice
 if [[ $choice == 'y' ]]; then
   echo "purging tex packages ..."
-  slackpkg remove texlive
+  slackpkg -batch=on -default_answer=y remove texlive
 fi
 
 touch ~/.purge-done
