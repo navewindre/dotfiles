@@ -1,6 +1,8 @@
 #!/bin/bash
 basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+cp $basedir/post-functions.conf /etc/slackpkg/post-functions.conf
+
 if [[ -f "~/.step1-done" ]]; then
   sh $basedir/step2
   exit
@@ -17,6 +19,8 @@ fi
 if [[ ! -f "~/.purge-done" ]]; then
   sh $basedir/package-purge
 fi
+
+rm /etc/slackpkg/post-functions.conf
 
 echo "sh $basedir/step2" >> /root/.bash_profile
 touch ~/.step1-done
