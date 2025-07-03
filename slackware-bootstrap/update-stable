@@ -25,6 +25,7 @@ slackpkg update gpg
 printf "\x1b[1;31m======================= [ \x1b[7;31m ATTENTION \x1b[0;0m\x1b[1;31m ] ========================\n\x1b[0;0m"
 echo "updating slackpkg, if prompted to overwrite configuration files"
 echo "pick 'Remove (R)' !!!!"
+read -p "press enter to continue"
 slackpkg upgrade slackpkg
 
 echo "============== [ system update ] ==============="
