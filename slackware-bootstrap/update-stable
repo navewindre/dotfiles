@@ -26,11 +26,6 @@ echo "updating slackpkg..."
 slackpkg -batch=on -postinst=off upgrade slackpkg
 rm /etc/slackpkg/mirrors.new
 
-echo "============== [ system update ] ==============="
-echo "simply press OK on the package selection screen"
-echo "================================================"
-read -p "press enter to continue"
-
 echo "==== [ updating system... ] ===="
 slackpkg -batch=on -default_answer=y upgrade-all
 slackpkg -batch=on -default_answer=y install-new
