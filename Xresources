@@ -3,6 +3,7 @@ Xft.dpi:88
 *.background: #000000
 *.foreground: #ffffff
 URxvt.font: xft:Px437 DOS/V re. JPN12:size=10
+URxvt.boldFont: xft:Px437 DOS/V re. JPN12:size=10
 
 ! black
 *.color0:       #000000

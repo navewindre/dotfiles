@@ -322,12 +322,17 @@
     <!-- Keybindings for running applications -->
     <keybind key="W-t">
       <action name="Execute">
-        <command>xfce4-terminal</command>
+        <command>urxvt</command>
       </action>
     </keybind>
     <keybind key="W-C-s">
       <action name="Execute">
         <command>scrot -s -e 'xclip -selection clipboard -t image/png -i $f &amp;&amp; rm $f'</command>
+      </action>
+    </keybind>
+    <keybind key="Print">
+      <action name="Execute">
+        <command>scrot -e 'xclip -selection clipboard -t image/png -i $f &amp;&amp; rm $f'</command>
       </action>
     </keybind>
     <keybind key="W-F11">
@@ -342,10 +347,10 @@
     </keybind>
     <keybind key="W-r">
       <action name="Execute">
-        <command>xfce4-appfinder -c</command>
+        <command>dmenu_run</command>
       </action>
     </keybind>
-    <keybind key="A-C-S-h">
+    <keybind key="W-C-S-h">
       <action name="Execute">
         <command>hotkey-legend</command>
       </action>
