@@ -345,6 +345,11 @@
         <command>xfce4-appfinder -c</command>
       </action>
     </keybind>
+    <keybind key="A-C-S-h">
+      <action name="Execute">
+        <command>hotkey-legend</command>
+      </action>
+    </keybind>
     <keybind key="W-x">
       <action name="ToggleMaximize"/>
     </keybind>
