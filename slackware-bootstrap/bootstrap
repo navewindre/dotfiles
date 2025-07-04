@@ -22,11 +22,11 @@ fi
 
 echo "working dir: $basedir"
 
-if [[ ! -f "~/.user-done" ]]; then
+if [[ ! -f "$HOME/.user-done" ]]; then
   sh $basedir/user $username
 fi
 
-if [[ ! -f "~/.sudo-done" ]]; then
+if [[ ! -f "$HOME/.sudo-done" ]]; then
   sh $basedir/sudo
 fi
 

@@ -3,23 +3,23 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 kernelver="6.15.2"
 
-if [[ -f "~/.step2-done" ]]; then
+if [[ -f "$HOME/.step2-done" ]]; then
   sh $basedir/step2-finish
   exit
 fi
 
 rm /root/.bash_profile
 
-if [[ ! -f "~/.slpkg-done" ]]; then
+if [[ ! -f "$HOME/.slpkg-done" ]]; then
   sh $basedir/slpkg
 fi
 
-if [[ ! -f "~/.multilib-done" ]]; then
+if [[ ! -f "$HOME/.multilib-done" ]]; then
   sh $basedir/multilib
 fi
 
 nreboot=0
-if [[ ! -f "~/.kernel-done" ]]; then
+if [[ ! -f "$HOME/.kernel-done" ]]; then
   echo "============== [ kernel update ] ==============="
   echo "you can choose to update your kernel"
   echo "after system reboot."
@@ -34,7 +34,7 @@ if [[ ! -f "~/.kernel-done" ]]; then
   fi
 fi
 
-if [[ ! -f "~/.nvidia-done" ]]; then
+if [[ ! -f "$HOME/.nvidia-done" ]]; then
   echo "================= [ nvidia driver ] ================="
   echo "you can choose to install the nvidia driver"
   echo "after system reboot."

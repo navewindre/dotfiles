@@ -3,20 +3,20 @@ basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cp $basedir/post-functions.conf /etc/slackpkg/post-functions.conf
 
-if [[ -f "~/.step1-done" ]]; then
+if [[ -f "$HOME/.step1-done" ]]; then
   sh $basedir/step2
   exit
 fi
 
-if [[ ! -f "~/.stable-done" ]]; then
+if [[ ! -f "$HOME/.stable-done" ]]; then
   sh $basedir/update-stable
 fi
 
-if [[ ! -f "~/.current-done" ]]; then
+if [[ ! -f "$HOME/.current-done" ]]; then
   sh $basedir/update-current
 fi
 
-if [[ ! -f "~/.purge-done" ]]; then
+if [[ ! -f "$HOME/.purge-done" ]]; then
   sh $basedir/package-purge
 fi
 
