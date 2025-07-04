@@ -18,6 +18,7 @@ if [[ ! -f "~/.multilib-done" ]]; then
   sh $basedir/multilib
 fi
 
+nreboot=0
 if [[ ! -f "~/.kernel-done" ]]; then
   echo "============== [ kernel update ] ==============="
   echo "you can choose to update your kernel"
@@ -25,7 +26,6 @@ if [[ ! -f "~/.kernel-done" ]]; then
   echo "this will update your kernel to $kernelver"
   echo "================================================"
 
-  nreboot=0
 
   read -p "do you want to update your kernel [y/n]? (y):" choice
   if [[ $choice == "y" ]]; then

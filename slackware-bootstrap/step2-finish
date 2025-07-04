@@ -1,5 +1,7 @@
 #!/bin/bash
 
+basedir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 if [[ -f "~/.nreboot" ]]; then
   echo "sh $basedir/finish" >> /root/.bash_profile
   echo "rm -f /root/.bash_profile" >> /root/.bash_profile
