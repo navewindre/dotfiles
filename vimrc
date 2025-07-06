@@ -251,7 +251,7 @@ lua <<EOF
       },
     },
     provider = "openai_mini",
-    vendors = {
+    providers = {
      ---@type AvanteProvider
       openai_mini = {
         __inherited_from = "openai",
@@ -600,6 +600,7 @@ function! GFLine()
   if len(parts) > 1
       execute 'e +' . parts[1] . ' ' . parts[0] | sleep 200m
       set number
+      execute('call lightline#bufferline#go_next()')
   else
       normal! gf
   endif

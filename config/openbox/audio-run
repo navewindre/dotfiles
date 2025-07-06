@@ -1,0 +1,11 @@
+#!/bin/bash
+
+pkill -9 -f pipewire
+pkill -9 -f pipewire-pulse
+pkill -9 -f wireplumber
+
+sleep 1
+
+daemon pipewire
+daemon pipewire-pulse
+urxvt -e "$HOME/.config/openbox/wireplumber"

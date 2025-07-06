@@ -184,6 +184,7 @@
         </finalactions>
       </action>
     </keybind>
+
     <keybind key="W-w">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
@@ -434,6 +435,9 @@
     <context name="Titlebar">
       <mousebind button="Left" action="Drag">
         <action name="Move"/>
+      </mousebind>
+      <mousebind button="W-Left" action="Click">
+        <action name="ToggleAlwaysOnTop"/>
       </mousebind>
       <mousebind button="Left" action="DoubleClick">
         <action name="ToggleMaximize"/>
