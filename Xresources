@@ -57,6 +57,10 @@ URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.keysym.C-minus: command:\033]710;xft:Px437 DOS/V re. JPN12:size=10\007
+URxvt.keysym.C-0: command:\033]710;xft:Px437 DOS/V re. JPN24:size=18\007
 URxvt.urlLauncher: firefox
 URxvt.underlineURLs: true
 URxvt.urlButton: 1
+URxvt.geometry: 84x24
+URXvt.inputMethod: ibus
