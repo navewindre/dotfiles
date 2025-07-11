@@ -21,7 +21,7 @@ sorted_file_list=$(printf "%s " "${sorted_files[@]}")
 echo $sorted_file_list
 
 killall spacefm
-screen -d -m "~/.config/openbox/spacefm"
+screen -d -m "$HOME/.config/openbox/spacefm"
 
 
 sleep 1
