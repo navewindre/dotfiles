@@ -1,0 +1,7 @@
+#!/bin/sh
+
+killall spacefm
+screen -d -m "~/.config/openbox/spacefm"
+
+xrandr --output DP-2 --off
+

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+~/.config/openbox/autorun/1_screenres
+xrandr --output DP-2 --mode 1920x1080 --rate 60 --pos 3200x0
+
+if [ ! -d "$HOME/Pictures/Wall" ]; then
+    exit 1
+fi
+
+while IFS= read -r file; do
+    if [ -n "$files_string" ]; then
+        files_string+=" "
+    fi
+    files_string+="$file"
+done < <(find "$HOME/Pictures/Wall" -type f)
+
+IFS=' ' read -ra files <<< "$files_string"
+sorted_files=($(printf "%s\n" "${files[@]}" | sort))
+sorted_file_list=$(printf "%s " "${sorted_files[@]}")
+
+echo $sorted_file_list
+
+killall spacefm
+screen -d -m "~/.config/openbox/spacefm"
+
+
+sleep 1
+feh --bg-fill $sorted_file_list
+

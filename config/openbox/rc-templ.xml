@@ -364,6 +364,21 @@
         <command>xfce4-popup-whiskermenu</command>
       </action>
     </keybind>
+    <keybind key="W-F5">
+      <action name="Execute">
+        <command>sh ~/.restart-panel</command>
+      </action>
+    </keybind>
+    <keybind key="W-F6">
+      <action name="Execute">
+        <command>sh ~/.projector_on</command>
+      </action>
+    </keybind>
+    <keybind key="W-F7">
+      <action name="Execute">
+        <command>sh ~/.projector_off</command>
+      </action>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>10</dragThreshold>
