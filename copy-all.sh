@@ -10,5 +10,11 @@ fi
 cp -rf ./config/* ~/.config/
 cp -rf ./icons/* ~/.icons/
 cp -rf ./themes/* ~/.themes/
+mkdir -p ~/.local/bin/
+cp -rf ./bin ~/.local/bin/
+cp -rf ./home/* ~/
 cp ./vimrc ~/.vimrc
+cp ./nvimrc ~/.nvimrc
 cp ./zshrc ~/.zshrc
+
+ln -s ~/.nvimrc ~/.config/nvim/init.vim
