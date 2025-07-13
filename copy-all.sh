@@ -23,6 +23,8 @@ cp -f ./zshrc ~/.zshrc
 rm ~/.config/nvim/init.vim
 ln -s ~/.nvimrc ~/.config/nvim/init.vim
 
+pushd $PWD
+cd ~/.config/openbox
 read -p "do you want (s)mall or (b)ig WM fonts?" answer
 if [ "$answer" = "s" ]; then
   echo "small titlebars"
@@ -31,3 +33,4 @@ else
   echo "big titlebars"
   ~/.config/openbox/fonts-big
 fi
+popd
