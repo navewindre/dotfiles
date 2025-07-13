@@ -23,6 +23,9 @@ cp -f ./zshrc ~/.zshrc
 rm ~/.config/nvim/init.vim
 ln -s ~/.nvimrc ~/.config/nvim/init.vim
 
+gsettings set org.gnome.desktop.interface gtk-theme 'platinum-custom'
+gsettings set org.gnome.desktop.interface icon-theme 'NineIcons'
+
 pushd $PWD
 cd ~/.config/openbox
 read -p "do you want (s)mall or (b)ig WM fonts?" answer
