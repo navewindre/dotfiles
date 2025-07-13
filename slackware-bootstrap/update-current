@@ -42,8 +42,7 @@ if [[ $kernel == "" ]]; then
   isgeneric=0
 fi
 
-initrdcmd="$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel)"
-initrdcmd=$(echo $initrdcmd | tail -1)
+initrdcmd=$(/usr/share/mkinitrd/mkinitrd_command_generator.sh -k $kernel | tail -1)
 $initrdcmd
 
 echo "==================== [ kernel update ] =========================="
