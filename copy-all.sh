@@ -15,7 +15,7 @@ cp -rf ./icons/ ~/.icons
 cp -rf ./themes/ ~/.themes
 mkdir -p ~/.local/bin/
 cp -rf ./bin ~/.local/bin/
-cp -rf ./home/ ~/
+cp -f ./home/* ~/
 cp -f ./vimrc ~/.vimrc
 cp -f ./nvimrc ~/.nvimrc
 cp -f ./zshrc ~/.zshrc
