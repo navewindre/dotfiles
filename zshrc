@@ -1,3 +1,5 @@
+export VCPKG_ROOT=/home/aura/code/vcpkg
+export PATH=$VCPKG_ROOT:$PATH
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
@@ -5,6 +7,12 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools-bin
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+source <(fzf --zsh)
+if [[ -f '$HOME/linuxbrew/.linuxbrew/bin/brew' ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+clear
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="evan"
@@ -21,6 +29,8 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+export TERMINAL=urxvt
 
 git_prompt() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -69,11 +79,21 @@ OLLAMA_MODELS="/media/dev/ollama/models"
 export OLLAMA_HOME
 export OLLAMA_MODELS
 
-EMSDK_QUIET=1 source $HOME/code/emsdk/emsdk_env.sh
+
+if [[ -f '$HOME/code/emsdk/emsdk_env.sh' ]]; then
+  EMSDK_QUIET=1 source $HOME/code/emsdk/emsdk_env.sh
+fi
 
 alias pkg='sudo slpkg --repository="*"'
 alias sbopkg='sudo slpkg --repository="sbo"'
 alias slpkg="sudo slpkg"
+alias fz="rg --color=always --files  ./ |
+  fzf --ansi \
+      --color 'hl:-1:underline,hl+:-1:underline:reverse' \
+      --delimiter : \
+      --preview 'bat --theme=ansi --color=always {1} --line-range=:500' \
+      --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+      --bind \"enter:become( ~/.cd {1} )\""
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/aurelia/google-cloud-sdk/path.zsh.inc' ]; then . '/home/aurelia/google-cloud-sdk/path.zsh.inc'; fi
@@ -83,7 +103,11 @@ if [ -f '/home/aurelia/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/aur
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
-source ~/.lscolors
-source ~/.profile
+if [[ -f '$HOME/.lscolors' ]]; then
+  source ~/.lscolors
+fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ -f '$HOME/.profile' ]]; then
+  source ~/.profile
+fi
+
