@@ -10,9 +10,9 @@ fi
 mkdir -p ~/.config
 mkdir -p ~/.icons
 mkdir -p ~/.themes
-cp -rf ./config/ ~/.config/
-cp -rf ./icons/ ~/.icons/
-cp -rf ./themes/ ~/.themes/
+cp -rf ./config/ ~/.config
+cp -rf ./icons/ ~/.icons
+cp -rf ./themes/ ~/.themes
 mkdir -p ~/.local/bin/
 cp -rf ./bin ~/.local/bin/
 cp -rf ./home/ ~/
