@@ -16,8 +16,9 @@ cp -rf ./themes/ ~/.themes/
 mkdir -p ~/.local/bin/
 cp -rf ./bin ~/.local/bin/
 cp -rf ./home/ ~/
-cp ./vimrc ~/.vimrc
-cp ./nvimrc ~/.nvimrc
-cp ./zshrc ~/.zshrc
+cp -f ./vimrc ~/.vimrc
+cp -f ./nvimrc ~/.nvimrc
+cp -f ./zshrc ~/.zshrc
 
+rm ~/.config/nvim/init.vim
 ln -s ~/.nvimrc ~/.config/nvim/init.vim
