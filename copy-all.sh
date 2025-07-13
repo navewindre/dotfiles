@@ -10,12 +10,12 @@ fi
 mkdir -p ~/.config
 mkdir -p ~/.icons
 mkdir -p ~/.themes
-cp -rf ./config/ ~/.config
-cp -rf ./icons/ ~/.icons
-cp -rf ./themes/ ~/.themes
+find ./config/ -maxdepth 1 -exec cp -rf '{}' ~/.config/ \;
+find ./icons/ -maxdepth 1 -exec cp -rf '{}' ~/.icons/ \;
+find ./themes/ -maxdepth 1 -exec cp -rf '{}' ~/.themes/ \;
+find ./home/ -maxdepth 1 -exec cp -rf '{}' ~/ \;
+find ./bin/ -maxdepth 1 -exec cp -rf '{}' ~/.local/bin \;
 mkdir -p ~/.local/bin/
-cp -rf ./bin ~/.local/bin/
-cp -f ./home/* ~/
 cp -f ./vimrc ~/.vimrc
 cp -f ./nvimrc ~/.nvimrc
 cp -f ./zshrc ~/.zshrc
