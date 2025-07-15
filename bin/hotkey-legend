@@ -35,4 +35,5 @@ win+r - xfce4-appfinder
 win+t - xfce4-terminal
 win+ctrl+s - screenshot (scrot + xclip)
 win+ctrl+e - ocr
+win+f11 - desktop-audio-record
 "

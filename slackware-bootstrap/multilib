@@ -12,7 +12,7 @@ if [[ $currentstr != "" ]]; then
 fi
 
 if [[ $iscurrent == 1 ]]; then
-  slpkg --repository="multilib" -i compat32-tools
+  slpkg --repository="multilib" -i -y compat32-tools
 fi
 
 if [[ $iscurrent == 0 ]]; then

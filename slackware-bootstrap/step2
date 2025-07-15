@@ -45,7 +45,7 @@ if [[ ! -f "$HOME/.nvidia-done" ]]; then
   read -p "do you want to install the nvidia driver [y/n]? (y):" choice
   if [[ $choice == "y" ]]; then
     nreboot=1
-    sh $basedir/nvidia
+    sh $basedir/nvidia-driver
   fi
 fi
 
