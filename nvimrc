@@ -2,7 +2,7 @@ let g:mapleader = '\'
 let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 " fuck zig niggers
 let g:polyglot_disabled = ['autoindent']
-
+let g:tabby_keybinding_accept = '<Tab>'
 lua <<EOF
   local Plug = vim.fn['plug#'];
   vim.call('plug#begin');
@@ -22,7 +22,7 @@ lua <<EOF
   Plug('nvim-telescope/telescope.nvim', { tag = '0.1.8' })
   Plug('hrsh7th/cmp-vsnip')
   Plug('hrsh7th/vim-vsnip')
-  Plug('TabbyML/vim-tabby')
+  Plug('navewindre/vim-tabby')
   Plug('Yggdroot/indentLine')
   Plug('johnfrankmorgan/whitespace.nvim')
   Plug('sheerun/vim-polyglot')
@@ -489,7 +489,6 @@ function! TablineTabs()
   return lightline#tabline()
 endfunction
 
-let g:tabby_keybinding_accept = '<Tab>'
 autocmd Filetype json,jsonc let g:indentLine_setConceal = 0
 autocmd Filetype javascriptreact,typescriptreact TSEnable indent
 autocmd Filetype * call tabby#inline_completion#keybindings#Setup()

@@ -2,9 +2,7 @@ let g:mapleader = '\'
 let g:vsnip_snippet_dir = '~/.config/nvim/snippets'
 " fuck zig niggers
 let g:polyglot_disabled = ['autoindent']
-
 call plug#begin()
-
 Plug 'chriskempson/base16-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -18,7 +16,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'preservim/nerdtree'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'TabbyML/vim-tabby'
+Plug 'navewindre/vim-tabby'
 Plug 'Yggdroot/indentLine'
 Plug 'johnfrankmorgan/whitespace.nvim'
 Plug 'sheerun/vim-polyglot'
