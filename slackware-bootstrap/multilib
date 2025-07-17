@@ -13,6 +13,28 @@ fi
 
 if [[ $iscurrent == 1 ]]; then
   slpkg --repository="multilib" -i -y compat32-tools
+  echo "===================== [ compat32 conversion ] ======================="
+  echo "in order to run 32bit software (e.g. steam), and not just compile it"
+  echo "you need to convert 64bit system packages to 32bit compatibility"
+  echo "this script can conver all system packages to 32bit"
+  echo "====================================================================="
+
+  doconvert=0
+  read -p "do you want to convert all 64-bit packages to 32bit compatibility? [y/n] (y)" doconvert
+
+  if [[ $doconvert == 1 ]]; then
+    mkdir ~/convert32
+    pushd ~/convert32
+    /usr/sbin/massconvert.sh -u https://mirror.yandex.ru/slackware/slackware-current/slackware
+
+    for dir in $(ls -d *-compat32); do
+      pushd $dir
+      upgradepkg --install-new *.t?z
+      popd
+    done
+
+    popd
+  fi
 fi
 
 if [[ $iscurrent == 0 ]]; then
@@ -21,6 +43,7 @@ if [[ $iscurrent == 0 ]]; then
   upgradepkg --reinstall --install-new *.t?z
   upgradepkg --install-new slackware64-compat32/*-compat32/*.t?z
 fi
+
 
 cd $oldpwd
 touch ~/.multilib-done
