@@ -379,6 +379,11 @@
         <command>sh ~/.projector_off</command>
       </action>
     </keybind>
+    <keybind key="W-C-c">
+      <action name="Execute">
+        <command>zjisho-clipboard</command>
+      </action>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>10</dragThreshold>
