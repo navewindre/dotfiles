@@ -174,7 +174,8 @@ lua <<EOF
   }
 
   vim.diagnostic.config({
-    signs = false
+    signs = false,
+    virtual_text = true,
   })
 
   require('whitespace-nvim').setup({
@@ -254,19 +255,11 @@ lua <<EOF
         insert = "<C-s>",
       },
     },
-    provider = "openai_mini",
+    provider = "ollama",
     providers = {
      ---@type AvanteProvider
-      openai_mini = {
-        __inherited_from = "openai",
-        model = "gpt-4o-mini",
-        timeout = 30,
-        max_tokens = 10000,
-      },
-     ---@type AvanteProvider
       ollama = {
-        api_key_name = '',
-        endpoint = "127.0.0.1:11434/v1",
+        endpoint = "127.0.0.1:11434",
         -- model = 'qwen2.5:7b-instruct-q4_K_M',
         model = 'qwen2.5-coder:7b-instruct-q5_K_M',
         -- model = 'yi-coder:9b-chat-q4_0',
@@ -279,24 +272,6 @@ lua <<EOF
         -- model = "starcoder2:15b-instruct-v0.1-q3_K_S",
         -- model = "gemma2:27b-instruct-q5_K_M",
         -- model = "mixtral:8x7b-instruct-v0.1-q3_K_L",
-        parse_curl_args = function(opts, code_opts)
-         return {
-           url = opts.endpoint .. "/chat/completions",
-           headers = {
-             ["Accept"] = "application/json",
-             ["Content-Type"] = "application/json",
-           },
-           body = {
-             model = opts.model,
-             messages = require("avante.providers").openai.parse_messages(code_opts), -- you can make your own message, but this is very advanced
-             max_tokens = 20000,
-             stream = true,
-           },
-         }
-        end,
-        parse_response_data = function(data_stream, event_state, opts)
-         require("avante.providers").openai.parse_response(data_stream, event_state, opts)
-        end,
       },
     },
 

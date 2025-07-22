@@ -8,6 +8,7 @@ export PATH=$PATH:$ANDROID_HOME/tools-bin
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
+
 source <(fzf --zsh)
 if [[ -f '$HOME/linuxbrew/.linuxbrew/bin/brew' ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
