@@ -1,7 +1,9 @@
 #!/bin/sh
 
-killall spacefm
+pkill -9 -f spacefm
 screen -d -m "$HOME/.config/openbox/spacefm"
 
 xrandr --output DP-2 --off
 
+pkill -9 -f xfce4-panel
+screen -d -m xfce4-panel

@@ -7,6 +7,9 @@ if [ ! -d "$HOME/Pictures/Wall" ]; then
     exit 1
 fi
 
+pkill -9 -f xfce4-panel
+screen -d -m xfce4-panel
+
 while IFS= read -r file; do
     if [ -n "$files_string" ]; then
         files_string+=" "
@@ -20,9 +23,8 @@ sorted_file_list=$(printf "%s " "${sorted_files[@]}")
 
 echo $sorted_file_list
 
-killall spacefm
+pkill -9 -f spacefm
 screen -d -m "$HOME/.config/openbox/spacefm"
-
 
 sleep 1
 feh --bg-fill $sorted_file_list
