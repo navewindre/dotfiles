@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=ayaya
+Comment=ayaya!!
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=ayaya
+MetacityTheme=ayaya
+ButtonLayout=:minimize,maximize,close
