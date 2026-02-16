@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pkill -f "Xorg :1"
+pkill -f "/home/aura/.local/share/sunshine/usr/bin/sunshine"
+DISPLAY=:0 /home/aura/.local/share/sunshine/usr/bin/sunshine

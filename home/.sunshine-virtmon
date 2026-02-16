@@ -1,0 +1,35 @@
+#!/bin/sh
+
+if [[ $DISPLAY == :1 ]]; then
+  echo "already on display :1"
+  exit 0
+fi
+
+echo "killing sunshine..."
+pkill -f "/home/aura/.local/share/sunshine/usr/bin/sunshine"
+
+echo "starting secondary xorg instance..."
+X :1 -config /etc/X11/xorg.conf.d/10-dummy.conf > /tmp/sunshine-virtmon.log &
+
+echo "starting openbox on secondary screen..."
+DISPLAY=:1 openbox > /tmp/sunshine-virtmon.log &
+
+echo "starting x11vnc..."
+DISPLAY=:1 x11vnc -display :1 -localhost -nopw -rfbport 5809 > /tmp/sunshine-virtmon.log &
+
+echo "starting xfce4-panel..."
+DISPLAY=:1 dbus-run-session xfce4-panel > /tmp/sunshine-virtmon.log &
+
+sleep 1
+DISPLAY=:1 xmodmap ~/.Xmodmap
+DISPLAY=:1 xrdb ~/.Xresources
+sleep 1
+DISPLAY=:1 feh --bg-fill /home/aura/Pictures/Wall/a1.png
+
+DEVICES=$(DISPLAY=:1 xinput list | rg Keychron | awk -F'id=' '{print $2}' | cut -f1)
+for i in $DEVICES; do
+  DISPLAY=:1 xinput disable $i
+done
+
+echo "starting sunshine..."
+DISPLAY=:1 exec /home/aura/.local/bin/sunshine

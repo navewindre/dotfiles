@@ -1,13 +1,16 @@
 export VCPKG_ROOT=/home/aura/code/vcpkg
+export VITASDK=/usr/local/vitasdk
 export PATH=$VCPKG_ROOT:$PATH
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools-bin
+export PATH=$VITASDK/bin:$PATH
+
+source ~/.keys
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-
 
 source <(fzf --zsh)
 if [[ -f '$HOME/linuxbrew/.linuxbrew/bin/brew' ]]; then
@@ -104,11 +107,13 @@ if [ -f '/home/aurelia/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/aur
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
-if [[ -f '$HOME/.lscolors' ]]; then
-  source ~/.lscolors
-fi
+source ~/.lscolors
+source ~/.profile
 
-if [[ -f '$HOME/.profile' ]]; then
-  source ~/.profile
+if [[ $TTY =~ '/dev/tty'* ]]; then
+else
+  if [[ -f ~/.todo ]]; then
+    ~/.todo
+  fi
 fi
 

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $DISPLAY == :1 ]]; then
+  echo "running on virtmon, exiting"
+  exit 0
+fi
+
+sh ~/.config/openbox/autorun/1_screenres
+sleep 2
+term -e "$HOME/.restart-panel"

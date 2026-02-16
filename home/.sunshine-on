@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $DISPLAY == :1 ]]; then
+  echo "running on virtmon, exiting"
+  exit 0
+fi
+
+xrandr --output DP-0 --mode 1280x720 --rate 165
+xrandr --output HDMI-0 --off 
+sleep 1
+term -e "$HOME/.restart-panel"

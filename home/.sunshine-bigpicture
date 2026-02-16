@@ -1,0 +1,19 @@
+#!/bin/bash
+
+$HOME/.sunshine-on
+if [[ $DISPLAY == :1 ]]; then
+  pkill -f steam
+  rm $HOME/.steam-display
+  echo ":1" > $HOME/.steam-display
+else
+  if [[ -f $HOME/.steam-display ]]; then
+    STEAMDISP=$(cat $HOME/.steam-display)
+    if [[ $STEAMDISP == :1 ]]; then
+      pkill -f steam
+    fi
+    rm $HOME/.steam-display
+  fi
+  echo ":0" > $HOME/.steam-display
+fi
+
+exo-open "steam://open/bigpicture"
