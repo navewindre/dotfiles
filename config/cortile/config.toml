@@ -8,7 +8,10 @@
 
 # Initial tiling activation, will be cached afterwards (true | false).
 tiling_enabled = false
-
+tiling_cycle = [
+  "vertical-left",
+  "vertical-right"
+]
 # Initial tiling layout, will be cached afterwards ("vertical-left" | "vertical-right" | "horizontal-top" | "horizontal-bottom" | "maximized" | "fullscreen").
 tiling_layout = "vertical-right"
 
@@ -89,16 +92,16 @@ edge_center_size = 100
 ################################################################################
 
 # Window text color.
-gui_text = [160, 156, 252, 255]
+gui_text = [225, 225, 225, 255]
 
 # Window background color.
-gui_background = [255, 255, 255, 255]
+gui_background = [21, 22, 24, 255]
 
 # Slave client layout color.
-gui_client_slave = [160, 156, 252, 255]
+gui_client_slave = [233, 105, 105, 255]
 
 # Master client layout color.
-gui_client_master = [160, 156, 252, 255]
+gui_client_master = [233, 105, 105, 255]
 
 # Systray icon background color.
 icon_background = [0, 0, 0, 0]
