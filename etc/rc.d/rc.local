@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# /etc/rc.d/rc.local:  Local system initialization script.
+#
+# Put any local startup commands in here.  Also, if you have
+# anything that needs to be run at shutdown time you can
+# make an /etc/rc.d/rc.local_shutdown script and put those
+# commands in there.
+
+if [[ -x /etc/rc.d/rc.libvirt ]]; then
+  /etc/rc.d/rc.libvirt start
+fi
+
+if [[ -x /lib/ufw/ufw-init ]]; then
+  echo "starting ufw..."
+  /lib/ufw/ufw-init start
+fi
+
+echo "loading uhid..."
+modprobe uhid
+echo "loading ntsync module..."
+modprobe ntsync
+
+if [[ -x /etc/rc.d/rc.splash ]]; then
+  /etc/rc.d/rc.splash
+fi
